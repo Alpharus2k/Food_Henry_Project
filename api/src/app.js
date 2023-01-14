@@ -7,7 +7,7 @@ const routes = require('./routes/index.js');
 require('./db.js');
 
 const server = express();
-/* TEORICO */
+/* TODO */
 //const { PORT, HOST } = process.env.PORT
 server.name = 'API';
 
