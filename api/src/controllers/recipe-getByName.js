@@ -7,7 +7,7 @@ const { NO_RESULTS, INVALID_NAME } = require("./error-msgs")
 
 const getRecipeByName = async (name) => {
     /* TEST */
-    
+    /*
     await Recipe.create({name: "Alta milanguesa",description: "LA mejor milanesa"})
     await Recipe.create({name: "Morfología de la tortilla",description: "Te morís!!"})
     await Recipe.create({name: "X",description: "X!!"})
@@ -18,8 +18,8 @@ const getRecipeByName = async (name) => {
 
     let results = [];
 
-    // Obtener datos de la API
-    let apiSearch =   await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true `)
+    // Obtener datos de la API                                                                          //&titleMatch=${name} &query=${name}
+    let apiSearch =   await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&titleMatch=${name}&addRecipeInformation=true `)
                         .then(response => response.data.results)
 
     // Los transforma acorde al Model.Recipe los datos recibidos de la api

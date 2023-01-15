@@ -13,8 +13,14 @@ module.exports = {
                 retorno[elem] = apiObj.title;
                 break;
             case "description":
-                /* split ear por propaganda.. quedarse con [0] */
-                retorno[elem] = apiObj.summary.split("<a href=")[0];
+                /* split por propaganda.. quedarse con [0] */
+                /* luego partimos por oracion y componemos todas menos la ultima */
+                let porOracion = apiObj.summary.split("<a href=")[0].split(". ")
+                let compuesto = "";
+                for (let i = 0; i < porOracion.length-1; i++) {
+                    compuesto += porOracion[i]+". ";
+                }
+                retorno[elem] = compuesto;
                 break;
             case "score":
                 retorno[elem] = apiObj.healthScore;
