@@ -29,7 +29,7 @@ router.get("/:idReceta", async (req, res) => {
 router.post("/", async (req, res) => {
     const { name, description, score, stepByStep, diets } = req.body;
     try {
-        const result = await postRecipe(name, description, score, stepByStep).dataValues
+        const result = await postRecipe(name, description, score, stepByStep)
         /*
             RECIBIR Y ASOCIAR Recipe <=> 
         */
