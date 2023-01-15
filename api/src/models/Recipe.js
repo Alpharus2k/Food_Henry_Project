@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const MAX_SCORE = 10;
 const MIN_SCORE = 1;
-
+const NO_NAME = 'Ingrese el nombre de la receta';
 // Exportamos una funcion que define el modelo
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
@@ -21,8 +21,11 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlphanumeric: true,
+        is: /^[a-zA-Z íáúóéñÑ]*$/,
         notEmpty: true,
+        notNull: {
+          msg: NO_NAME
+        }
       },
     },
     description: {

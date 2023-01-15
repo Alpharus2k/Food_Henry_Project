@@ -7,8 +7,9 @@ const routes = require('./routes/index.js');
 require('./db.js');
 
 const server = express();
-/* TODO */
+/* Datos para el HEADER */
 //const { PORT, HOST } = process.env.PORT
+
 server.name = 'API';
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
