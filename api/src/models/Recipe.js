@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const MAX_SCORE = 10;
+const MAX_SCORE = 100;
 const MIN_SCORE = 1;
 const NO_NAME = 'Ingrese el nombre de la receta';
 // Exportamos una funcion que define el modelo
