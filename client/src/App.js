@@ -1,7 +1,7 @@
 import './App.css';
 //import { Route, useLocation } from "react-router-dom";
-//import NavBar from "./components/NavBar/Navbar";
-//import Home from "./components/Home/Home";
+//import x from "./components/";
+//import y from "./components/";
 
 function App() {
 
