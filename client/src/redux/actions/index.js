@@ -1,48 +1,44 @@
-import axios from "axios";
+//const {} process.env;
+
+// Action Type!!
+export const GET_ALL_RECEPIES = "GET_ALL_RECIPES";
 /*
-// Aca deben declarar las variables donde tengan el action types.
-export const GET_ALL_TEAMS = "GET_ALL_TEAMS";
-export const GET_TEAM_DETAIL = "GET_TEAM_DETAIL";
-export const CREATE_TEAM = "CREATE_TEAM";
-export const DELETE_TEAM = "DELETE_TEAM";
-// Esten atentos a que los nombres de las variables coincidan.
+export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
+export const GET_RECEPIES_BY_NAME = "GET_RECEPIES_BY_NAME";
+export const CREATE_RECIPE = "CREATE_RECIPE";
 
-// Fijarse que la sintaxis de nuestra Action creator es distinta a lo que venimos haciendo. Esto es
-// debido al uso del middleware "thunk", el cual nos permite trabajar con acciones asincrónicas.
-// Necesitamos hacer uso de este middleware ya que nuestras peticiones al back siempre son asincrónicas,
-// por lo tanto, necesitamos ese "delay" para despachar nuestra action hasta que la data nos llegue.
-// Vas a tener que usar la funcion "dispatch" recibida en la funcion interna para despachar la action que
-// va a llegar a nuestro reducer.
-// Acá pueden ver un poco mejor la explicación y algunos ejemplos: https://github.com/reduxjs/redux-thunk
-
-// Usar ruta 'http://localhost:3001/teams' para buscar todas los teams en nuestro back.
-// Esto lo vas a poder hacer utilizando fetch.
-
-export const getAllTeams = () =>  {
-  // Tu código acá
+//export const GET_DIETS = "GET_DIETS"
+*/
+export const getAllRecipes = () =>  {
   return async function (dispatch) {
-    return fetch('http://localhost:3001/teams')
+    //return await fetch(`${window.event.URL_RECIPES}`)
+    return await fetch(`http://localhost:3001/recipes`)
       .then((response) => response.json())
-      .then(data => dispatch({type: GET_ALL_TEAMS, payload: data}))
+      .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
   };
 };
+/*
+export const getRecipeById = (id) => {
+    return async (dispatch) => {
+      return fetch(`${window.event.URL_RECIPES}/${id}`)
+        .then((response) => response.json())
+        .then(data => dispatch({type: GET_RECIPE_BY_ID, payload: data}))
+      };
+  };
+export const getRecipeByName = (name) => {
+    return async (dispatch) => {
+      return fetch(`${window.event.URL_RECIPES}/?name=${name}`)
+        .then((response) => response.json())
+        .then(data => dispatch({type: GET_RECEPIES_BY_NAME, payload: data}))
+      };
+  };
+  export const createRecipe = (payload) => {
+    // Tu código acá
 
-// Usar ruta 'http://localhost:3001/teams/:id' para buscar un team por el id pasado
-// como parámetro de la action creator.
-// Donde :id, el id recibido como argumento de la action creator.
-// Ojo, hacer un console.log de la respuesta desde el back. En nuestro reducer esperamos un objeto;
-// export const getTeam = () => dispatch => {};
-
-export const getTeamDetail = (id) => {
-//export const getTeamDetail = (id) => (dispatch) => {
-  // Tu código acá
-  return async (dispatch) => {
-    return fetch(`http://localhost:3001/teams/${id}`)
-      .then((response) => response.json())
-      .then(data => dispatch({type: GET_TEAM_DETAIL, payload: data}))
-    };
-};
-
+    //payload.id = id;
+    return {type: CREATE_RECIPE, payload: payload }
+  };
+/*
 // Inicializamos id en 5, para que nuestros próximos ID's no se pisen con los existentes.
 // La vas a usar en la funcion createTeam, descomentala cuando te haga falta;
 
@@ -61,5 +57,4 @@ export const createTeam = (payload) => {
 export const deleteTeam = (id) => {
   // Tu código acá
   return {type: DELETE_TEAM, payload: id}
-};
-*/
+};*/

@@ -1,27 +1,29 @@
 import './App.css';
-import { BrowserRouter as Router } from "react-router-dom";
-import { Switch, Route } from "react-router-dom";
+import { Routes } from "react-router-dom";
+import { Route, useLocation } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar'
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Home from './components/Home/Home';
 import Landing from './components/Landing/Landing';
 import FormRecipe from './components/Forms/Recipe-Form';
-//import { Route, useLocation } from "react-router-dom";
+import RecipeFull from './components/Recipe/Recipe-Full';
 
 function App() {
+  const location = useLocation();
 
   return (
     <div className="App">
+      {location.pathname !== "/" && <NavBar />}
       <h1>Henry Food</h1>
       <NavBar></NavBar>
-      <Router>
-        <Switch>
-          <Route exact path="/"><Landing /></Route>
-          <Route path="/home"><Home /></Route>
-          <Route path="/create"><FormRecipe /></Route>
-          <Route path="*"><PageNotFound /></Route>
-        </Switch>
-      </Router>
+       <Routes>
+          <Route exact path={"/"} element={<Landing/>}> </Route>
+          <Route path="/home" element={<Home/>}></Route>
+          <Route path="/recipe/:recipeId" element={<RecipeFull/>}></Route>
+          <Route path="/create" element={<FormRecipe/>}></Route>
+          <Route path="*" element={<PageNotFound/>}></Route>
+      </Routes>
+
     </div>
   );
 }
