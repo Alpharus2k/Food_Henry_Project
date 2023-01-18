@@ -1,6 +1,4 @@
-import './App.css';
-import { Routes } from "react-router-dom";
-import { Route, useLocation } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from './components/NavBar/NavBar'
 import PageNotFound from './components/PageNotFound/PageNotFound';
 import Home from './components/Home/Home';
@@ -12,10 +10,8 @@ function App() {
   const location = useLocation();
 
   return (
-    <div className="App">
+    <div >
       {location.pathname !== "/" && <NavBar />}
-      <h1>Henry Food</h1>
-      <NavBar></NavBar>
        <Routes>
           <Route exact path={"/"} element={<Landing/>}> </Route>
           <Route path="/home" element={<Home/>}></Route>

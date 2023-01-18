@@ -1,0 +1,56 @@
+.mainContainer {
+    position:absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top:0px;
+    right:0px;
+    bottom:0px;
+    left:0px;
+    background: rgba(220, 234, 238, 0.3);
+    /* background-color:rgb(220, 234, 238); */
+    background-image: url("../../assets/batch-cooking.jpg");
+    background-repeat: no-repeat;
+    text-align:center;
+    background-size: contain;
+    background-position: center;
+}
+.centralContainer {
+    background: rgba(127, 255, 212, 0.3);
+    width: 40%;
+    height: 80%;
+    padding: 10px;
+    border-radius: 10% / 50%;
+    border: 1px solid rgb(27, 26, 26);
+    margin: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.shadow__btn {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    font-size: 17px;
+    color: #fff;
+    border-radius: 7px;
+    letter-spacing: 4px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: 0.5s;
+    transition-property: box-shadow;
+  }
+  .shadow__btn {
+    background: rgb(0,140,255);
+    box-shadow: 0 0 25px rgb(0,140,255);
+  }
+
+  .shadow__btn:hover {
+    box-shadow: 0 0 5px rgb(0,140,255),
+                0 0 25px rgb(0,140,255),
+                0 0 50px rgb(0,140,255),
+                0 0 100px rgb(0,140,255);
+  }
