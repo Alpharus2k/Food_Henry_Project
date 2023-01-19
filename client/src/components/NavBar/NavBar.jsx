@@ -9,7 +9,6 @@ function NavBar() {
                 <Link to="/home">Home</Link>
                 <Link to="/create">Create</Link>
             </div>
-           
         </nav>
     )
 }
