@@ -8,7 +8,7 @@ const Landing = ()=>{
         <p>¿No sabes que cocinar hoy?</p>
         <p>¡Te simplificamos la vida!</p>
         <h1>Henry's Recipies</h1>
-        <Link to={"/home"}><button className={style.shadow__btn}>HOME</button></Link>
+        <Link to="/home"><button className={style.shadow__btn}>HOME {'>'}</button></Link>
       </div>
     </div>
   )
