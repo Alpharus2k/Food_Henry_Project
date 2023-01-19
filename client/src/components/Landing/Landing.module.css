@@ -29,28 +29,34 @@
     align-items: center;
     justify-content: center;
 }
-
+.centralContainer p {
+  font-size: 2rem;
+  padding: 0.2rem
+}
+.centralContainer h1 {
+  font-size: 4rem;
+  padding-bottom: 1rem;
+}
 .shadow__btn {
-    margin-top: 10px;
-    padding: 10px 20px;
-    border: none;
-    font-size: 17px;
-    color: #fff;
-    border-radius: 7px;
-    letter-spacing: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
-    transition: 0.5s;
-    transition-property: box-shadow;
-  }
-  .shadow__btn {
-    background: rgb(0,140,255);
-    box-shadow: 0 0 25px rgb(0,140,255);
-  }
+  padding: 0.9rem 1.3rem;
+  margin-left: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  color: #fff;
+  border-radius: .8rem;
+  letter-spacing: 0.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+  background: rgb(0,140,255);
+  box-shadow: 0 0 25px rgb(0,140,255);
+  margin-bottom: 0.3rem;
+}
 
-  .shadow__btn:hover {
-    box-shadow: 0 0 5px rgb(0,140,255),
-                0 0 25px rgb(0,140,255),
-                0 0 50px rgb(0,140,255),
-                0 0 100px rgb(0,140,255);
-  }
+.shadow__btn:hover {
+  box-shadow: 0 0 0.5rem rgb(0,140,255),
+              0 0 1.5rem rgb(0,140,255),
+              0 0 3rem rgb(0,140,255),
+              0 0 4rem rgb(0,140,255);
+}
