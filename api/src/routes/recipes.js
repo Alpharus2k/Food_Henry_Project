@@ -3,11 +3,12 @@ const router = Router();
 const { getRecipeByName } = require("../controllers/recipe-getByName")
 const { getRecipeByID } = require("../controllers/recipe-getByID")
 const { postRecipe } = require("../controllers/recipe-post")
+const { getEveryRecipe } = require("../controllers/recipe-getEverything")
 
 router.get("/", async (req, res) => {
     const { name } = req.query;
     try {
-        const result = await getRecipeByName( name );
+        const result = name ? await getRecipeByName( name ): await getEveryRecipe();
         return res.status(200).json( result )
     } catch (error) {
         return res.status(400).json({ error: error.message })
