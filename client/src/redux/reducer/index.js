@@ -1,7 +1,7 @@
 import { GET_ALL_RECEPIES } from "../actions/index"
 //  GET_RECEPIES_BY_NAME, GET_RECIPE_BY_ID, GET_DIETS, CREATE_RECIPE
 
-// @initialState estado inicial del REDUCER
+// @initialState == estado inicial del REDUCER
 const initialState = {
   recipes: [],
   recipe: {},

@@ -136,6 +136,8 @@ export default function RecipeForm(){
           <label for="scales">Scales</label>
         </div> */}
       </div>
+      {/* AGREGAR EL BOTON!!! */}
+      {/* <button></button> */}
     </form>
     </div>
   </>

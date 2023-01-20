@@ -1,4 +1,4 @@
-//const {} process.env;
+import axios from "axios";
 
 // Action Type!!
 export const GET_ALL_RECEPIES = "GET_ALL_RECIPES";
@@ -11,10 +11,13 @@ export const CREATE_RECIPE = "CREATE_RECIPE";
 */
 export const getAllRecipes = () =>  {
   return async function (dispatch) {
-    //return await fetch(`${window.event.URL_RECIPES}`)
-    return await fetch(`http://localhost:3001/recipes`)
-      .then((response) => response.json())
-      .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
+    //${window.event.URL_RECIPES}
+    return await axios.get(`http://localhost:3001/recipes`)
+                .then(result => dispatch({type: GET_ALL_RECEPIES, payload: result.data}))
+
+    //return await fetch.get(`http://localhost:3001/recipes`)
+      // .then((response) => response.json())
+      
   };
 };
 /*
