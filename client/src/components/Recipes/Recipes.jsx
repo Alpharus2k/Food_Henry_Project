@@ -15,7 +15,7 @@ class Recipes extends React.Component{
         return (
             <div className={style.grid}>
                 <h1>{this.props.recipes.length}</h1>
-
+            
             </div>
         )
     }
