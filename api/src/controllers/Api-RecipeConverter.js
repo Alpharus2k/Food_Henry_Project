@@ -26,13 +26,13 @@ module.exports = {
                 retorno[elem] = apiObj.healthScore;
                 break;
             case "stepByStep":
-                let pasosArr = apiObj.analyzedInstructions[0]["steps"]
-                let pasosStr = "";
-                for (let i = 0; i < pasosArr.length; i++) {
-                    pasosStr += pasosArr[i].number +". "+ pasosArr[i].step+"\n ";
-                }
-                console.log(pasosStr);
-                retorno[elem] = pasosStr;
+                // let pasosArr = apiObj.analyzedInstructions[0]["steps"];
+                // let pasosStr = "";
+                // for (let i = 0; i < pasosArr.length; i++) {
+                //     pasosStr += pasosArr[i].number +". "+ pasosArr[i].step+"\n ";
+                // }
+                // retorno[elem] = pasosStr;
+                retorno[elem]=apiObj.analyzedInstructions[0]
                 break;
             default:
                 //throw Error("SE MODIFICÓ 'MODEL DE RECIPE' FALTA MODIFICAR EL CONTROLER")

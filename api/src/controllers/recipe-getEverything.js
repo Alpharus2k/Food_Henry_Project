@@ -15,12 +15,14 @@ const getEveryRecipe = async () => {
 
     let results = [];
 
-    // Obtener datos de la API                                                                          //&titleMatch=${name} &query=${name}
-    let apiSearch =   await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true `)
-                        .then(response => response.data.results)
+    // Obtener datos de la API                                                                                                   //&number=100
+    let apiSearch = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
+                    .then(response => response.data.results)
 
     // Los transforma acorde al Model.Recipe los datos recibidos de la api
-    apiSearch = apiSearch.map( re => buildRecipeAPI(re))
+    if (Array.isArray(apiSearch) && apiSearch.length) {
+        apiSearch = apiSearch.map( re => buildRecipeAPI(re));
+    }
 
     // Busca en la DB
     const dbSearch = await Recipe.findAll()

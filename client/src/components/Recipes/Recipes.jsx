@@ -1,4 +1,5 @@
 import React from "react";
+import style from "./Recipes.modules.css"
 import { connect } from "react-redux";
 import { getAllRecipes } from "../../redux/actions/index"
 
@@ -7,13 +8,14 @@ class Recipes extends React.Component{
     constructor(props){
         super(props)
         // console.log(props)
+        this.props.getRecipes();
     }
 
     render(){
         return (
-            <div>
+            <div className={style.grid}>
                 <h1>{this.props.recipes.length}</h1>
-                <button onClick={this.props.getRecipes}>GET RECIPES</button>
+
             </div>
         )
     }

@@ -17,7 +17,7 @@ const getRecipeByName = async (name) => {
     if( !name.length || !name.trim() ) throw Error(INVALID_NAME)
     let results = [];
 
-    // Obtener datos de la API                                                                          //&titleMatch=${name} &query=${name}
+    // Obtener datos de la API                                                                          //&titleMatch=${name} &query=${name}     //&number=100
     let apiSearch =   await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true `)
                         .then(response => response.data.results)
 
