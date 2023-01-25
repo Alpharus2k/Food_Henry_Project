@@ -11,13 +11,18 @@ export const CREATE_RECIPE = "CREATE_RECIPE";
 */
 export const getAllRecipes = () =>  {
   return async function (dispatch) {
-    //${window.event.URL_RECIPES}
-    return await axios.get(`http://localhost:3001/recipes`)
-                .then(result => dispatch({type: GET_ALL_RECEPIES, payload: result.data}))
+    // window.env.URL_RECIPES "http://localhost:3001/recipes"
+    /*
+    return await fetch("http://localhost:3001/recipes")
+                .then(res => res.json())
+                .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
+    */
 
-    //return await fetch.get(`http://localhost:3001/recipes`)
-      // .then((response) => response.json())
-      
+
+    return await axios.get(window.env.URL_RECIPES)
+                 .then(res => res.data)
+                 .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
+    //return dispatch({type: GET_ALL_RECEPIES, payload: testData});
   };
 };
 /*

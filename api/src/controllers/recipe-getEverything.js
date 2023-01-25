@@ -3,7 +3,8 @@ const { Recipe } = require('../db.js');
 const { buildRecipeAPI } = require("./Api-RecipeConverter")
 const { API_KEY } = process.env;
 const { NO_RESULTS } = require("./error-msgs")
-
+//FAKE DATA
+const { LISTA_RECETAS } = require("../utils/API-simulator")
 const getEveryRecipe = async () => {
     /* TEST */
     /*
@@ -14,14 +15,19 @@ const getEveryRecipe = async () => {
     /* FIN TEST */
 
     let results = [];
-
-    // Obtener datos de la API                                                                          //&titleMatch=${name} &query=${name}
-    let apiSearch =   await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true `)
-                        .then(response => response.data.results)
-
+                                                                                
+    /*
+    // Obtener datos de la API                                                                                                   //&number=100
+    let apiSearch = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
+                    .then(response => response.data.results)
     // Los transforma acorde al Model.Recipe los datos recibidos de la api
-    apiSearch = apiSearch.map( re => buildRecipeAPI(re))
-
+    if (Array.isArray(apiSearch) && apiSearch.length) {
+        apiSearch = apiSearch.map( re => buildRecipeAPI(re));
+    }
+                                                         
+   //*     FAKE DATA       */                     
+    let apiSearch = LISTA_RECETAS.map( re => buildRecipeAPI(re));
+                                                   
     // Busca en la DB
     const dbSearch = await Recipe.findAll()
 
