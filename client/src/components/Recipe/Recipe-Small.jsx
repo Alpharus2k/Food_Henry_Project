@@ -18,6 +18,7 @@ const RecipeSmall = ({recipe}) => {
             <img src={recipe?.url} alt={recipe?.name} />
             <h2>{recipe?.name}</h2>
             <p>{diets}</p>
+            <p>{recipe.score}</p>
         </div>
     )
 }
