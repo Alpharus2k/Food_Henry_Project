@@ -8,10 +8,13 @@ import RecipeForm from './components/Forms/Recipe-Form';
 
 function App() {
   const location = useLocation();
-
+  const pathname = location.pathname;
   return (
     <div >
-      {location.pathname !== "/" && <NavBar />}
+      {pathname !== "/" &&  <NavBar />}
+      {/* NavBar solo aparece en Páginas Específicas
+        {pathname !== "/" && (["/home","/create"].findIndex(e => e.includes(pathname)) >= 0) && <NavBar />}
+      */}
        <Routes>
           <Route exact path={"/"} element={<Landing/>}> </Route>
           <Route path="/home" element={<Home/>}></Route>
