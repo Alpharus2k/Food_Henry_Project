@@ -2,8 +2,8 @@
 import style from "./Recipe-Small.module.css"
 
 const RecipeSmall = ({recipe}) => {
-    /*const [state, setState] = useState({
-        id: -1,
+    /*{
+        id: 0,
         url: "",
         name: "",
         description: "",
@@ -11,14 +11,14 @@ const RecipeSmall = ({recipe}) => {
         stepByStep: "",
         url: ""
     })*/
-
+    //let path = "/create/"+recipe.id;
     let diets = recipe.diets ? recipe.diets.join(", ") : "Dieta sin especificar"
     return (
-        <div key={recipe.id} className={style.recipe}>
+        <div key={recipe.id} className={style.recipe} >
             <img src={recipe?.url} alt={recipe?.name} />
             <h2>{recipe?.name}</h2>
-            <p>{diets}</p>
-            <p>{recipe.score}</p>
+            <p><b>Diets:  </b>{diets}</p>
+            <p><b>Healty Score:  </b>{recipe.score}</p>
         </div>
     )
 }

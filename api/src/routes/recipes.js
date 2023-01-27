@@ -8,7 +8,16 @@ const { getEveryRecipe } = require("../controllers/recipe-getEverything")
 router.get("/", async (req, res) => {
     const { name } = req.query;
     try {
-        const result = name ? await getRecipeByName( name ): await getEveryRecipe();
+        //const result = name ? await getRecipeByName( name ): await getEveryRecipe();
+        let result;
+        if( name ) {
+            console.log(name);
+            result = await getRecipeByName( name );
+        }else {
+            console.log("No Name");
+            result = await getEveryRecipe();
+        }
+         console.log(result);
         return res.status(200).json( result )
     } catch (error) {
         return res.status(400).json({ error: error.message })
@@ -30,7 +39,7 @@ router.get("/:idReceta", async (req, res) => {
 router.post("/", async (req, res) => {
     const { name, description, score, stepByStep, diets } = req.body;
     try {
-        const result = await postRecipe(name, description, score, stepByStep)
+        const result = await postRecipe(name, description, score, stepByStep, url, dietsIds )
         /*
             RECIBIR Y ASOCIAR Recipe <=> 
         */

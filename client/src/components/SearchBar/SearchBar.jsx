@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { 	sortRecipesHighScore,
-			getRecipeByName,
-			sortRecipesLowScore,
-            sortRecipesAsc,
-            sortRecipesDesc,
-			unSorted } from '../../redux/actions/index';
+import {
+		sortRecipesHighScore,
+		sortRecipesLowScore,
+        sortRecipesAsc,
+        sortRecipesDesc,
+		unSorted				} from '../../redux/actions/index';
+import style from "./SearchBar.module.css";
 
-const SearchBar = ({find, setSearch, handleSearchChange}) => {
+const SearchBar = ({find, handleSearchChange}) => {
 	const dispatch = useDispatch();
  	const [sort, setSort] = useState('');
 	useEffect(() => {
-		dispatch(getRecipeByName(find));
 		switch( sort ){
 			case "desc":
 				dispatch(sortRecipesDesc());
@@ -29,29 +29,33 @@ const SearchBar = ({find, setSearch, handleSearchChange}) => {
 				dispatch(unSorted())
 				break;
 		}
-		// handleSearchChange(find)
-		// dispatch(getRecipeByName(find))
 		return () => {
 		 	dispatch(unSorted());
 		}
-		}, [find, sort, dispatch]);
+		}, [sort, dispatch]);
 
 	return (
 		<div>
-			<div className="title">
-				<h1>Filtering Test</h1>
+			{/* Page Title */}
+			<div className={style.title}>
+				<h1>Henry's Recipies</h1>
 			</div>
-			<div className="filters">
-				<div className="search">
+			{/* Search Bar */}
+			<div className={style.line}>
+				<div className={style.search}>
+					<h5>Search:</h5>
 					<input
+						className={style.resize }
 						type="text"
 						value={find}
 						onChange={handleSearchChange}
 						placeholder="Search"
 					/>
 				</div>
+				{/* Sort By */}
 				<div className="sort">
-					<select onChange={(e) => setSort(e.target.value)} defaultValue="none" >
+					<h5>Sort By:</h5>
+					<select className={style.resize} onChange={(e) => setSort(e.target.value)} >
 						<option value="asc">A - Z</option>
 						<option value="desc">Z - A</option>
 						<option value="high">High Health Score</option>
@@ -62,60 +66,5 @@ const SearchBar = ({find, setSearch, handleSearchChange}) => {
 		</div>
 	)
 }
-// const SearchBar = ({ search, setSearch, onChange }) => {
-// 	const dispatch = useDispatch();
-// 	const [sort, setSort] = useState('');
-
-
-// 	useEffect(() => {
-// 		//dispatch(searchRecipe(search));
-//         switch( sort ){
-//             case "desc":
-//                 dispatch(sortRecipesDesc());
-//                 break;
-//             case "asc":
-//                 dispatch(sortRecipesAsc());
-//                 break;*/
-//             case "high":
-//                 dispatch(sortRecipesHighScore())
-//                 break;
-//            /* case "low":
-//                 dispatch(sortRecipesLowScore())
-//                 break;*/
-//             default:
-//                 break;
-//         }
-//         return () => {
-//             dispatch(unSorted());
-//         }
-// 	}, [search, sort, dispatch]);
-
-// 	return (
-// 		<span>
-// 			<div className="title">
-// 				<h1>React Redux Filtering</h1>
-// 			</div>
-// 			<div className="filters">
-// 				<div className="search">
-// 					<input
-// 						type="text"
-// 						value={search}
-// 						onChange={onChange}
-// 						placeholder="Search"
-// 					/>
-// 				</div>
-// 				<div className="sort">
-// 					<select onChange={(e) => setSort(e.target.value)}>
-// 						<option value="asc">Acendente</option>
-// 						<option value="desc">Descendente</option>
-//                         <option value="high">High Score</option>
-// 						<option value="low">Low Score</option>
-// 					</select>
-// 				</div>
-// 			</div>
-// 		</span>
-// 	);
-// };
-
 
 export default SearchBar;

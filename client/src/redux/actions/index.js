@@ -5,7 +5,6 @@ export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
 export const CREATE_RECIPE = "CREATE_RECIPE";
 export const GET_DIETS = "GET_DIETS"
 */
-
 export const GET_RECEPIES_BY_NAME = "GET_RECEPIES_BY_NAME";
 export const GET_ALL_RECEPIES = "GET_ALL_RECIPES";
 export const SORT_HIGH_SCORE = "SORT_HIGH_SCORE";
@@ -13,6 +12,7 @@ export const SORT_LOW_SCORE = "SORT_LOW_SCORE";
 export const SORT_ASC = "SORT_ASC";
 export const SORT_DESC = "SORT_DESC";
 export const UNSORTED = "UNSORTED";
+
 
 export const unSorted = () => {
   return (dispatch) => {
@@ -40,11 +40,14 @@ export const sortRecipesLowScore = () => {
   }
 }
 export const getRecipeByName = (name) => async (dispatch) =>{
-    await  fetch(`${window.event.URL_RECIPES}/?name=${name}`)
-      .then((response) => response.json())
-      .then(data => dispatch({type: GET_RECEPIES_BY_NAME, payload: data}))
-
+  //let url = window.event.URL_RECIPES+`/?name="+${name}`
+  let apiData = await axios.get(`http://localhost:3001/recipes/?name=${name}`)
+  let data = apiData.data;
+  dispatch({type: GET_RECEPIES_BY_NAME, payload: data})
 };
+
+
+
 export const getAllRecipes = () =>  {
   return function (dispatch) {
     // window.env.URL_RECIPES "http://localhost:3001/recipes"

@@ -18,7 +18,7 @@ function App() {
        <Routes>
           <Route exact path={"/"} element={<Landing/>}> </Route>
           <Route path="/home" element={<Home/>}></Route>
-          {/* <Route path="/recipe/:recipeId" props=id element={<RecipeFull/>}></Route> */}
+          {/* <Route path="/recipe/:id" props={id} element={<RecipeFull/>}></Route> */}
           <Route path="/create" element={<RecipeForm/>}></Route>
           <Route path="*" element={<PageNotFound/>}></Route>
       </Routes>

@@ -8,6 +8,7 @@ function NavBar() {
             <div className={style.centralLinks}>
                 <Link to="/home">Home</Link>
                 <Link to="/create">Create</Link>
+                <Link to="/aboutUs">Example</Link>
             </div>
         </nav>
     )
