@@ -39,7 +39,7 @@ const rootReducer = (state = initialState, action) => {
     case GET_DIETS:
       return {...state, diets: action.payload}
     case FILTER_BY_DIET:
-      return {...state, sorted: [...state.recipes.filter((rec) => rec.diets.includes(action.payload))]}
+      return {...state, sorted: [...state.sorted.filter((rec) => rec.diets && rec.diets.includes(action.payload))]}
     // case GET_RECIPE_BY_ID:
     //   return {...state, recipe: [...state.recipe, action.payload]}
     default:

@@ -10,7 +10,7 @@ function App() {
   const location = useLocation();
   const pathname = location.pathname;
   return (
-    <div >
+    <div style={{marginBottom: "2rem"}}>
       {pathname !== "/" &&  <NavBar />}
       {/* NavBar solo aparece en Páginas Específicas
         {pathname !== "/" && (["/home","/create"].findIndex(e => e.includes(pathname)) >= 0) && <NavBar />}

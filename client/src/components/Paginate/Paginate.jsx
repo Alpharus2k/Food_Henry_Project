@@ -2,6 +2,7 @@ import RecipeSmall from "../Recipe/Recipe-Small";
 import style from "./Paginate.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
+const LIMIT_NUMBER_BUTONS = 10;
 
 const Paginate = ({recipes, perPage, totalPages}) =>{
     const [currentPage, setCurrentPage] = useState(1);
@@ -10,6 +11,9 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
     useEffect(() => {
         setToShow(recipes.slice(perPage * (currentPage - 1), perPage * currentPage))
     },[currentPage,recipes,perPage])
+
+    // Botones de acceso rapido de paginado
+    let buttons = makeButtons(totalPages, currentPage, setCurrentPage);
 
     return (
         <>
@@ -25,12 +29,18 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
             )}
             </div>
         {/* Pagination */}
+            {/* Previous */}
         <div className={style.spaced}>
             <div className={style.pageButton}>
 				<button className={ currentPage === 1 ? style.hidden : ""} onClick={() => setCurrentPage(currentPage-1)}>
-					&laquo; Previous
+					&laquo; Prev
 				</button>
 			</div>
+                {/* Numeric Buttons */}
+            <div className={style.numericButton}>
+                {buttons}
+            </div>
+                {/* Next */}
             <div className={style.pageButton}>
 				<button className={currentPage === totalPages ? style.hidden : ""} onClick={() => setCurrentPage(currentPage+1)}>
                 Next &raquo;
@@ -41,3 +51,19 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
     )
 }
 export default Paginate;
+
+function makeButtons(totalPages, currentPage, setCurrentPage) {
+    const retorno = [];
+    for (let i = 0; i < totalPages && i < LIMIT_NUMBER_BUTONS; i++) retorno.push(i+1);
+    if(totalPages > LIMIT_NUMBER_BUTONS) retorno.push(totalPages)
+    return retorno.map( (elem, index) => {
+        return (
+            <button className={ currentPage === elem ? style.hidden : ""}
+                    key={index}
+                    value={elem}
+                    onClick={() => setCurrentPage(elem)}
+                    >
+                {elem}
+            </button>
+        );
+})}

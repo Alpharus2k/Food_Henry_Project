@@ -42,7 +42,7 @@ function processStepByStep(obj) {
     let pasosArr = obj["steps"];
     let pasosStr = "";
     for (let i = 0; i < pasosArr.length; i++) {
-        pasosStr += pasosArr[i].number +". "+ pasosArr[i].step+"\n ";
+        pasosStr += "<h6><b>"+pasosArr[i].number +".</b> "+ pasosArr[i].step+"</h6>";
     }
     return pasosStr;
 }

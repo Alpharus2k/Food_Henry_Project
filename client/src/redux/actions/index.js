@@ -16,6 +16,7 @@ export const UNSORTED = "UNSORTED";
 export const FILTER_BY_DIET = "FILTER_BY_DIET";
 
 export const filterByDiet = (diet) => {
+  alert(diet)
   return (dispatch) => {
     dispatch({type: FILTER_BY_DIET, payload: diet})
   }

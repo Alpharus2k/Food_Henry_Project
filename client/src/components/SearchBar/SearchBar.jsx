@@ -7,14 +7,15 @@ import {
         sortRecipesDesc,
 		unSorted,
 		getDiets,
-		filterByDiet,				
+		filterByDiet,
 		getAllRecipes} from '../../redux/actions/index';
 import style from "./SearchBar.module.css";
 
 const SearchBar = ({find, handleSearchChange}) => {
-	const NO_DIET = "none";
+	const DEF_VALUE = "none";
 	const dispatch = useDispatch();
- 	const [sort, setSort] = useState('');
+ 	const [sort, setSort] = useState(DEF_VALUE);
+	//const [filter, setFilter] = useState(DEF_VALUE);
 	useEffect(() => { dispatch(getDiets()) },[dispatch])     // Precarga los elementos a mostrar
 	const diets = useSelector((state) => state.diets);
 	useEffect(() => {
@@ -41,7 +42,7 @@ const SearchBar = ({find, handleSearchChange}) => {
 		}, [sort, dispatch]);
 
 		const handleFilter = (diet) => {
-    		if (diet !== NO_DIET){
+    		if (diet !== DEF_VALUE){
       			dispatch(filterByDiet(diet));
     		}else {
 				dispatch(getAllRecipes())
@@ -67,10 +68,10 @@ const SearchBar = ({find, handleSearchChange}) => {
 					/>
 				</div>
 				{/* Sort By */}
-				<div className="sort">
+				<div>
 					<h5>Sort By:</h5>
-					<select className={style.resize} onChange={(e) => setSort(e.target.value)} >
-						<option value="none">...</option>
+					<select className={style.resize} onChange={(e) => setSort(e.target.value)} defaultValue={DEF_VALUE}>
+						<option value={DEF_VALUE}>...</option>
 						<option value="asc">A - Z</option>
 						<option value="desc">Z - A</option>
 						<option value="high">High Health Score</option>
@@ -78,10 +79,10 @@ const SearchBar = ({find, handleSearchChange}) => {
 					</select>
 				</div>
 				{/* Filter By Diet*/}
-				<div className="sort">
+				<div>
 					<h5>Filer By Diet:</h5>
-					<select className={style.resize} onChange={(e) => handleFilter(e.target.value)} defaultValue={NO_DIET}>
-						<option value={NO_DIET}>{NO_DIET}</option>
+					<select className={style.resize} onChange={(e) => handleFilter(e.target.value)} defaultValue={DEF_VALUE}>
+						<option value={DEF_VALUE}>...</option>
 						{ diets.map( diet => {
 							return (
 								<option key={diet.id} value={diet.name}>{diet.name}</option>
