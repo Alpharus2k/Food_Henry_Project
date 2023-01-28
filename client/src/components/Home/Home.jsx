@@ -12,6 +12,7 @@ const Home = () => {
   const dispatch = useDispatch();                               // Dispachador de Redux
   useEffect(() => { dispatch(getAllRecipes()) },[dispatch])     // Precarga los elementos a mostrar
   const recipes = useSelector((state) => state.sorted);         // Hook de traer data del estado global
+
     /* HANDLER */
   const handleSearch = (e) => {
     let str = e.target.value.trim();
@@ -24,7 +25,7 @@ const Home = () => {
   }
     /* Constants */
     const RECIPE_PER_PAGE = 9;
-    let totalPages = Math.ceil(recipes.length / RECIPE_PER_PAGE)
+    const totalPages = Math.ceil(recipes.length / RECIPE_PER_PAGE)
     return(
     <>
       {/* SearchBar && Filters */}

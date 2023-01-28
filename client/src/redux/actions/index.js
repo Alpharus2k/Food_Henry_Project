@@ -3,8 +3,9 @@ import axios from "axios";
 /*
 export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
 export const CREATE_RECIPE = "CREATE_RECIPE";
-export const GET_DIETS = "GET_DIETS"
+
 */
+export const GET_DIETS = "GET_DIETS"
 export const GET_RECEPIES_BY_NAME = "GET_RECEPIES_BY_NAME";
 export const GET_ALL_RECEPIES = "GET_ALL_RECIPES";
 export const SORT_HIGH_SCORE = "SORT_HIGH_SCORE";
@@ -12,8 +13,19 @@ export const SORT_LOW_SCORE = "SORT_LOW_SCORE";
 export const SORT_ASC = "SORT_ASC";
 export const SORT_DESC = "SORT_DESC";
 export const UNSORTED = "UNSORTED";
+export const FILTER_BY_DIET = "FILTER_BY_DIET";
 
-
+export const filterByDiet = (diet) => {
+  return (dispatch) => {
+    dispatch({type: FILTER_BY_DIET, payload: diet})
+  }
+}
+export const getDiets = () => async (dispatch) => {
+  const apiData = await axios.get(window.env.URL_DIETS)
+  let data = apiData.data;
+  console.log(data);
+  dispatch({type: GET_DIETS, payload: data})
+}
 export const unSorted = () => {
   return (dispatch) => {
     dispatch({type: UNSORTED})
@@ -45,8 +57,6 @@ export const getRecipeByName = (name) => async (dispatch) =>{
   let data = apiData.data;
   dispatch({type: GET_RECEPIES_BY_NAME, payload: data})
 };
-
-
 
 export const getAllRecipes = () =>  {
   return function (dispatch) {

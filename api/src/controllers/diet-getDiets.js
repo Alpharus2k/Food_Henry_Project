@@ -30,7 +30,7 @@ const getDiets = async () => {
     const aux = apiSearch.map(diet => buildDietAPI( diet ));
     //const aux = auxArr.map(diet => buildDietAPI( diet ));
     console.log(aux);
-    return await Diet.bulkCreate(aux);
+    return await Diet.bulkCreate(aux, {returning: true});
     //return await Promise.all(aux.map(d => Diet.create(d)));
     }
 

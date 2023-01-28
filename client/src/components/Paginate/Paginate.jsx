@@ -9,7 +9,7 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
 
     useEffect(() => {
         setToShow(recipes.slice(perPage * (currentPage - 1), perPage * currentPage))
-    },[currentPage,recipes])
+    },[currentPage,recipes,perPage])
 
     return (
         <>
