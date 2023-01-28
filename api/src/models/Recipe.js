@@ -47,7 +47,8 @@ module.exports = (sequelize) => {
       validate: {
         //is : /((?:(?:http?|ftp)[s]*:\/\/)?[a-z0-9-%\/\&=?\.]+\.[a-z]{2,4}\/?([^\s<>\#%"\,\{\}\\|\\\^\[\]`]+)?)/gi
         is: /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
-      }
+      },
+      defaultValue: "https://spoonacular.com/recipeImages/157426-312x231.jpg"
     }
 
   },

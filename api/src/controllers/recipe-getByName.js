@@ -8,10 +8,10 @@ const { LISTA_RECETAS } = require("../utils/API-simulator")
     
 const getRecipeByName = async (name) => {
         /* TEST */
-    
-    await Recipe.create({name: "Alta milanguesa",description: "LA mejor milanesa"})
+    // [ "Gluten Free", "Ketogenic", "Vegetarian", "Lacto-Vegetarian", "Ovo-Vegetarian", "Vegan", "Pescetarian", "Paleo", "Primal", "Low FODMAP", "Whole30"]
+    await Recipe.create({name: "Alta milanguesa",description: "LA mejor milanesa" })
     await Recipe.create({name: "Morfología de la tortilla",description: "Te morís!!"})
-    await Recipe.create({name: "X",description: "X!!"})
+    await Recipe.create({name: "X",description: "X!!", diets: []})
     await Recipe.create({name: "Algo con X",description: "nada por aca!!"})
     await Recipe.create({name: "CANNX",description: "nada por aca!!"})
 

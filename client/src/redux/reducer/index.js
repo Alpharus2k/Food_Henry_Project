@@ -23,15 +23,15 @@ const rootReducer = (state = initialState, action) => {
     case GET_ALL_RECEPIES:
       return {...state, recipes: action.payload, sorted: action.payload}
     case SORT_HIGH_SCORE:
-      return {...state, sorted: [ ...state.recipes.sort((a,b) => {return b.score - a.score })] }
+      return {...state, sorted: [ ...state.sorted.sort((a,b) => {return b.score - a.score })] }
     case SORT_LOW_SCORE:
-      return {...state, sorted: [ ...state.recipes.sort((a,b) => {return a.score - b.score })] }
+      return {...state, sorted: [ ...state.sorted.sort((a,b) => {return a.score - b.score })] }
     case SORT_ASC:
-      return { ...state, sorted: [ ...state.recipes.sort((a,b) => { return b.name > a.name ? -1 : b.name === a.name ? 0 : 1 })]}
+      return { ...state, sorted: [ ...state.sorted.sort((a,b) => { return b.name > a.name ? -1 : b.name === a.name ? 0 : 1 })]}
     case SORT_DESC:
-      return { ...state, sorted: [ ...state.recipes.sort((a,b) => { return a.name > b.name ? -1 : a.name === b.name ? 0 : 1 })]}
+      return { ...state, sorted: [ ...state.sorted.sort((a,b) => { return a.name > b.name ? -1 : a.name === b.name ? 0 : 1 })]}
     case UNSORTED:
-      return { ...state, sorted: [...state.recipes]}
+      return { ...state, sorted: [...state.sorted]}
     case GET_RECEPIES_BY_NAME:
        return {...state, sorted: [...action.payload]}
     // case GET_RECIPE_BY_ID:

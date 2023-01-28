@@ -1,18 +1,13 @@
-.recipe {
-    padding: 2rem;
-    border-radius: .8rem;
-	border: 1px solid #292929;
-	color: #292929;
-}
-.recipe img{
+
+.recipe__img{
     width: 100%;
     height: auto;
     border-radius: 0.6rem;
 }
-.recipe h2{
+.recipe__h2{
     font-size: 1.5rem;
 }
-.recipe p{
+.recipe__p{
     font-size: 1.1rem;
     padding-top: 0.3rem;
 }

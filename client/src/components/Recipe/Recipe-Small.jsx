@@ -12,14 +12,14 @@ const RecipeSmall = ({recipe}) => {
         url: ""
     })*/
     //let path = "/create/"+recipe.id;
-    let diets = recipe.diets ? recipe.diets.join(", ") : "Dieta sin especificar"
+    let diets = recipe.diets && recipe.diets.length > 0 ? recipe.diets.join(", ") : "Dieta sin especificar";
     return (
-        <div key={recipe.id} className={style.recipe} >
-            <img src={recipe?.url} alt={recipe?.name} />
-            <h2>{recipe?.name}</h2>
-            <p><b>Diets:  </b>{diets}</p>
-            <p><b>Healty Score:  </b>{recipe.score}</p>
-        </div>
+        <>
+            <img src={recipe?.url} alt={recipe?.name} className={style.recipe__img}/>
+            <h2 className={style.recipe__h2}>{recipe?.name}</h2>
+            <p className={style.recipe__p}><b>Diets:  </b>{diets}</p>
+            <p className={style.recipe__p}><b>Healty Score:  </b>{recipe.score}</p>
+        </>
     )
 }
 

@@ -8,16 +8,7 @@ const { getEveryRecipe } = require("../controllers/recipe-getEverything")
 router.get("/", async (req, res) => {
     const { name } = req.query;
     try {
-        //const result = name ? await getRecipeByName( name ): await getEveryRecipe();
-        let result;
-        if( name ) {
-            console.log(name);
-            result = await getRecipeByName( name );
-        }else {
-            console.log("No Name");
-            result = await getEveryRecipe();
-        }
-         console.log(result);
+        const result = name ? await getRecipeByName( name ): await getEveryRecipe();
         return res.status(200).json( result )
     } catch (error) {
         return res.status(400).json({ error: error.message })
