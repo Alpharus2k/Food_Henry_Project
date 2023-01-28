@@ -1,145 +1,40 @@
-import RecipeSmall from "../Recipe/Recipe-Small";
+import Paginate from "../Paginate/Paginate";
 import SearchBar from "../SearchBar/SearchBar"
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRecipes } from "../../redux/actions/index";
+import { getAllRecipes, getRecipeByName } from "../../redux/actions/index";
 import style from "./Home.module.css";
 import { useState } from "react";
-//import Paginate from "../test/Paginate";
 
 const Home = () => {
     // Hooks para manejar las Busquedas
-  const { search, setSearch } = useState("");
-    // Hook que nos permite decir en que pagina estamos
-  //const {current, setCurrent } = useState(1)
-    // Hook que permite dispachar acctions de REDUX
-  const dispatch = useDispatch();
-    // Dispacho la accion
-  useEffect(() => {
-    dispatch(getAllRecipes());
-  },[dispatch])
-    // Hook de traer data del estado global
-  const recipes = useSelector((state) => state.sorted);       // posts
+  const [ search, setSearch ] = useState("");                   // Hook que permite dispachar acctions de REDUX
+  const dispatch = useDispatch();                               // Dispachador de Redux
+  useEffect(() => { dispatch(getAllRecipes()) },[dispatch])     // Precarga los elementos a mostrar
+  const recipes = useSelector((state) => state.sorted);         // Hook de traer data del estado global
 
-
-    // Declaramos constantes
-  //const RECIPES_PER_PAGE = 9;                                     //postPerPage
-  //const totalRecipes = recipes.length;                            //totalPosts
-  //const idxSliceFinish = current * RECIPES_PER_PAGE;  //2do parram slice (inclusivo)
-  //const idxSliceStart = idxSliceFinish - RECIPES_PER_PAGE;  // obtengo la amplitud a mostrar
-  //const slicedRecipes = recipes.slice(idxSliceStart, idxSliceFinish);
-  // Handler de Busquedas
-
+    /* HANDLER */
   const handleSearch = (e) => {
     let str = e.target.value.trim();
-      // si el string procesado tiene algun dato (salvo espacios en blanco)
-      // vamos a querer ubicarnos en la pagina 1 del resultado por arrojar
-    //if (str.length) setCurrent(1);
-      // mandamos a buscar
-    setSearch(str);
+    if (str.length){
+      dispatch(getRecipeByName(e.target.value));
+    }else {
+      dispatch(getAllRecipes())
+    }
+    setSearch(e.target.value);
   }
-
+    /* Constants */
+    const RECIPE_PER_PAGE = 9;
+    const totalPages = Math.ceil(recipes.length / RECIPE_PER_PAGE)
     return(
     <>
-      <div>
-        <SearchBar find={search} setSearch={setSearch} handleSearchChange={handleSearch}/>
+      {/* SearchBar && Filters */}
+      <div  className={style.centered}>
+        <SearchBar find={search} handleSearchChange={handleSearch}/>
       </div>
 
-      <div className={style.gridContainer}>
-        { recipes.map( (recipe, index) => {
-            return (
-              <>
-                <RecipeSmall key={index} recipe={recipe} />
-              </>
-            )
-          })
-        }
-      </div>
+      <Paginate recipes={recipes} perPage={RECIPE_PER_PAGE} totalPages={totalPages}/>
     </>
     )
   }
   export default Home;
-
-  // {totalRecipes > RECIPES_PER_PAGE && (
-  //   <Paginate
-  //         current={current}
-  //         setCurrent={setCurrent}
-  //         totalRecipes={totalRecipes}
-  //         recipesPerPage={RECIPES_PER_PAGE}
-  //   />
-  // )}
-
-
-  /*
-  useEffect(() => {
-    didMount
-  
-    return () => {
-      didWillUnmount
-    }
-  }, [pendienteDe])
-  */
- // TODO
- /*
- [ ] Botones/Opciones para filtrar por por tipo de dieta
-[ ] Botones/Opciones para ordenar tanto ascendentemente como 
-descendentemente las recetas por orden alfabético y por health score 
-(nivel de comida saludable).
-[ ] Paginado para ir buscando y mostrando las siguientes recetas, 9 recetas 
-por pagina, mostrando las primeros 9 en la primer pagina.
-*//*
-import { useState } from "react";
-import {  sortRecipesHighScore,
-          sortRecipesLowScore,
-          unsort,
-          sortRecipesAsc,
-          sortRecipesDesc,
-          getRecipeByName
-          } from "../../redux/actions/index"*/
-/*
-switch(sortBy){
-      case "asc":
-        dispatch(sortRecipesAsc())
-        break;
-      case "desc":
-        dispatch(sortRecipesDesc())
-        break;
-      case "highScoreFirst":
-        dispatch(sortRecipesHighScore())
-        break;
-      case "lowScoreFirst":
-        dispatch(sortRecipesLowScore())
-        break;
-      case "none":
-        dispatch(unsort())
-        break;
-      default:
-        setSortBy("none");
-        break;
-    }
-*/
-/*
-const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllRecipes());
-  });
-  // Declaramos Sort
-  const [sortBy, setSortBy] = useState("none")
-  // Dispacho la accion
-  useEffect(() => {
-    dispatch(getAllRecipes());
-    dispatch(search)
-    if(sortBy === "asc") dispatch(sortRecipesAsc())
-    if(sortBy === "desc") dispatch(sortRecipesDesc())
-    if(sortBy === "highScoreFirst") dispatch(sortRecipesHighScore())
-    if(sortBy === "lowScoreFirst") dispatch(sortRecipesLowScore())
-    if(sortBy === "none") dispatch(unsort())
-    // Al desmontar
-    return () => {
-      setSortBy("none")
-    }
-  },[dispatch, sortBy])
-  // Hook de traer data del estado global
-  const recipes = useSelector((state) => state.sorted);
-
-  */

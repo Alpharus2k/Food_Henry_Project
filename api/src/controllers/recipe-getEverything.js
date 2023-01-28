@@ -26,6 +26,7 @@ const getEveryRecipe = async () => {
     }
                                                          
    //*     FAKE DATA       */                     
+   
     let apiSearch = LISTA_RECETAS.map( re => buildRecipeAPI(re));
                                                    
     // Busca en la DB
