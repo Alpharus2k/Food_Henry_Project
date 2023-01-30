@@ -1,7 +1,5 @@
-
 .mainContainer {
     display: flex;
-    background-color: red;
     text-align:center;
     background-size: contain;
     background-position: center;
@@ -9,28 +7,106 @@
     right:0px;
     bottom:0px;
     left:0px;
-    justify-content: center;
     flex-direction: column;
     padding: 2% 0;
     text-align: left;
 }
 .mainContainer h1 {
     padding-bottom: 2%;
+    align-self: center;
 }
 .formContainer{
-    background-color: white;
+    background: rgba(233, 246, 250, 0.3);
     display: flex;
     flex-direction: column;
     align-self: center;
-    width: 80%;
+    width: 60%;
     padding-top: 2%;
-    padding: 0.5rem;
+    border-radius: .8rem;
+    padding: 1rem;
+}
+.twoInRow {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .pairContainer {
     display: flex;
     flex-direction: column;
+    margin: .4rem 0;
+}
+.width65 {
+  display: flex;
+  flex-direction: row;
+  width: 65%;
+}
+.width65 input {
+  width: 100%;
+  padding: .3rem;
+  border-radius: .3rem;
 }
 
+.width30 {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+}
+.width30 input{
+  width: auto;
+  padding: .3rem;
+  border-radius: .3rem;
+}
+.pairContainer textarea{
+  padding: 0.5rem;
+  resize: none;
+  border-radius: .3rem;
+}
+.gridContainer{
+  display: grid;
+  gap: 0.4rem;
+  padding: .3rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+.danger {
+  align-self: flex-start;
+  text-decoration: underline;
+  text-decoration-color: red;
+  color: grey;
+}
+.danger__rigth {
+  font-size: .6rem;
+  color: grey;
+  align-self: flex-end;
+  text-decoration: underline;
+  text-decoration-color: red;
+}
+.shadow__btn {
+  margin-top: 1rem;
+  justify-self: center;
+  align-self: center;
+  max-width: 20%;
+  padding: 0.9rem 1.3rem;
+  margin-left: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  color: #fff;
+  border-radius: .8rem;
+  letter-spacing: 0.4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  transition: 0.5s;
+  transition-property: box-shadow;
+  background: rgb(0,140,255);
+  box-shadow: 0 0 25px rgb(0,140,255);
+  margin-bottom: 0.3rem;
+}
+
+.shadow__btn:hover {
+  box-shadow: 0 0 0.5rem rgb(0,140,255),
+              0 0 1.5rem rgb(0,140,255),
+              0 0 3rem rgb(0,140,255),
+              0 0 4rem rgb(0,140,255);
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,

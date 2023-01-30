@@ -45,7 +45,8 @@
   "react-dotenv": {
     "whitelist": [
       "URL_RECIPES",
-      "URL_DIETS"
+      "URL_DIETS",
+      "URL_POST_RECIPE"
     ]
   },
   "devDependencies": {

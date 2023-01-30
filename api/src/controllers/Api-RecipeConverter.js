@@ -21,7 +21,8 @@ module.exports = {
                 retorno[elem] = apiObj.healthScore;
                 break;
             case "stepByStep":
-                retorno[elem] = processStepByStep(apiObj.analyzedInstructions[0])
+                //if (!obj.hasOwnProperty("steps")) return "";
+                retorno[elem] = apiObj.analyzedInstructions[0] ? processStepByStep(apiObj.analyzedInstructions[0]) : ""
                 break;
             case "url":
                 //Podemos procesar esto agregando img por Default y/o en el front por si el url no existe
@@ -39,10 +40,11 @@ module.exports = {
     }
 }
 function processStepByStep(obj) {
+
     let pasosArr = obj["steps"];
     let pasosStr = "";
     for (let i = 0; i < pasosArr.length; i++) {
-        pasosStr += "<h6><b>"+pasosArr[i].number +".</b> "+ pasosArr[i].step+"</h6>";
+        pasosStr += "<h6><b>"+pasosArr[i].number +".</b> "+ pasosArr[i].step+"</h6><br>";
     }
     return pasosStr;
 }

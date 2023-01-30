@@ -4,18 +4,11 @@ const { buildRecipeAPI } = require("./Api-RecipeConverter")
 const { API_KEY } = process.env;
 const { NO_RESULTS } = require("./error-msgs")
 //FAKE DATA
-const { LISTA_RECETAS } = require("../utils/API-simulator")
-const getEveryRecipe = async () => {
-    /* TEST */
-    /*
-    await Recipe.create({name: "Alta milanguesa",description: "LA mejor milanesa"})
-    await Recipe.create({name: "Morfología de la tortilla",description: "Te morís!!"})
-    await Recipe.create({name: "X",description: "X!!"})
-    await Recipe.create({name: "Algo con X",description: "nada por aca!!"})
-    /* FIN TEST */
+const { LISTA_RECETAS } = require("../utils/FakeData")
+const { FAKE } = require("../utils/processedFake")
 
+const getEveryRecipe = async () => {
     let results = [];
-                                                                                
     /*
     // Obtener datos de la API                                                                                                   //&number=100
     let apiSearch = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
@@ -25,15 +18,15 @@ const getEveryRecipe = async () => {
         apiSearch = apiSearch.map( re => buildRecipeAPI(re));
     }
                                                          
-   //*     FAKE DATA       */                     
-   
-    let apiSearch = LISTA_RECETAS.map( re => buildRecipeAPI(re));
-                                                   
+   //*     FAKE DATA       */
+    let apiSearch = FAKE;
+                                                        
+
     // Busca en la DB
     const dbSearch = await Recipe.findAll()
 
     // Integra las busquedas
-    results = [...apiSearch, ...dbSearch];
+    results = [...dbSearch, ...apiSearch];
     if( !results.length ) throw Error(NO_RESULTS)
     return results;
 }

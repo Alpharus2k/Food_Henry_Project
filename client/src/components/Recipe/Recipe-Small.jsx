@@ -1,17 +1,10 @@
-//import { useState } from "react"
+//import { Link } from "react-router-dom";
 import style from "./Recipe-Small.module.css"
 
 const RecipeSmall = ({recipe}) => {
-    /*{
-        id: 0,
-        url: "",
-        name: "",
-        description: "",
-        score: -1,
-        stepByStep: "",
-        url: ""
-    })*/
-    //let path = "/create/"+recipe.id;
+    /* TODO
+        LINK a FULL RECIPE
+    */
     let diets = recipe.diets && recipe.diets.length > 0 ? recipe.diets.join(", ") : "Dieta sin especificar";
     return (
         <>

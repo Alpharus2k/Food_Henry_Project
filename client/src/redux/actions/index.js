@@ -1,11 +1,7 @@
 import axios from "axios";
 // Action Type!!
-/*
-export const GET_RECIPE_BY_ID = "GET_RECIPE_BY_ID";
-export const CREATE_RECIPE = "CREATE_RECIPE";
-
-*/
-export const GET_DIETS = "GET_DIETS"
+export const GET_FULL_DETAIL = "GET_FULL_DETAIL";
+export const GET_DIETS = "GET_DIETS";
 export const GET_RECEPIES_BY_NAME = "GET_RECEPIES_BY_NAME";
 export const GET_ALL_RECEPIES = "GET_ALL_RECIPES";
 export const SORT_HIGH_SCORE = "SORT_HIGH_SCORE";
@@ -14,9 +10,51 @@ export const SORT_ASC = "SORT_ASC";
 export const SORT_DESC = "SORT_DESC";
 export const UNSORTED = "UNSORTED";
 export const FILTER_BY_DIET = "FILTER_BY_DIET";
+export const SEARCH_SORT_FILTER = "SEARCH_SORT_FILTER"
+export const CREATE_RECIPE = "CREATE_RECIPE";
 
+function dispatchSort(sort) {
+  return async(dispatch) => {
+    switch( sort ){
+      case "desc":
+        return await dispatch(sortRecipesDesc());
+      case "asc":
+        return await dispatch(sortRecipesAsc());
+      case "high":
+        return await dispatch(sortRecipesHighScore())
+      case "low":
+        return await dispatch(sortRecipesLowScore())
+      default:
+        return await dispatch(unSorted())
+    }
+  }
+}
+export const createRecipe = (name, description, score, stepByStep, url, dietsIds) => {
+  return async (dispatch) => {
+    console.log("Entra al create");
+    console.log(name + " / "+description + " / "+score + " / "+stepByStep + " / "+url + " / "+ dietsIds);
+    //window.env.URL_POST_RECIPE
+    const result = await axios.post(window.env.URL_POST_RECIPE,{name, description, score, stepByStep, url, dietsIds})
+    let data = result.data;
+    dispatch({type: CREATE_RECIPE, payload: data})
+  }
+}
+export const searchSortFilter = (search, sort, filter) => {
+  return async(dispatch) => {
+    if(search.trim().length) await dispatch(getRecipeByName(search))
+    else await dispatch(getAllRecipes())
+
+    if(sort !== "none")   await dispatch(dispatchSort(sort))
+    if(filter !== "none")  await dispatch(filterByDiet(filter))
+  }
+}
+
+export const getFullDetail = (id) => {
+  return async (dispatch) => {
+    await dispatch({type: GET_FULL_DETAIL, payload: id})
+  }
+}
 export const filterByDiet = (diet) => {
-  alert(diet)
   return (dispatch) => {
     dispatch({type: FILTER_BY_DIET, payload: diet})
   }
@@ -24,7 +62,6 @@ export const filterByDiet = (diet) => {
 export const getDiets = () => async (dispatch) => {
   const apiData = await axios.get(window.env.URL_DIETS)
   let data = apiData.data;
-  console.log(data);
   dispatch({type: GET_DIETS, payload: data})
 }
 export const unSorted = () => {
@@ -53,6 +90,7 @@ export const sortRecipesLowScore = () => {
   }
 }
 export const getRecipeByName = (name) => async (dispatch) =>{
+  console.log("NAME "+name);
   //let url = window.event.URL_RECIPES+`/?name="+${name}`
   let apiData = await axios.get(`http://localhost:3001/recipes/?name=${name}`)
   let data = apiData.data;
@@ -61,60 +99,9 @@ export const getRecipeByName = (name) => async (dispatch) =>{
 
 export const getAllRecipes = () =>  {
   return function (dispatch) {
-    // window.env.URL_RECIPES "http://localhost:3001/recipes"
-    /*
-    return await fetch("http://localhost:3001/recipes")
-                .then(res => res.json())
-                .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
-    */
     return axios.get(window.env.URL_RECIPES)
                  .then(res => res.data)
                  .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
-    //return dispatch({type: GET_ALL_RECEPIES, payload: testData});
+
   };
 };
-
-
-
-
-
-
-
-
-
-
-/*
-export const getRecipeById = (id) => {
-    return async (dispatch) => {
-      return fetch(`${window.event.URL_RECIPES}/${id}`)
-        .then((response) => response.json())
-        .then(data => dispatch({type: GET_RECIPE_BY_ID, payload: data}))
-      };
-  };
-
-  export const createRecipe = (payload) => {
-    // Tu código acá
-
-    //payload.id = id;
-    return {type: CREATE_RECIPE, payload: payload }
-  };
-/*
-// Inicializamos id en 5, para que nuestros próximos ID's no se pisen con los existentes.
-// La vas a usar en la funcion createTeam, descomentala cuando te haga falta;
-
-let id = 5;
-
-// Desde el componente ejecutamos la action creator, pasandole como argumento los values que vamos a utilizar para crear un team.
-export const createTeam = (payload) => {
-  // Tu código acá
-  id++;
-  payload.id = id;
-  return {type: CREATE_TEAM, payload: payload }
-
-};
-
-// Desde el componente ejecutamos la action creator, pasandole como argumento el id del team que queremos eliminar.
-export const deleteTeam = (id) => {
-  // Tu código acá
-  return {type: DELETE_TEAM, payload: id}
-};*/

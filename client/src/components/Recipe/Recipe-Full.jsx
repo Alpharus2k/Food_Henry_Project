@@ -1,31 +1,27 @@
+import {getFullDetail} from "../../redux/actions/index"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+const NO_DATA_MSG = "Sin especificar";
 
-const RecipeFull = ({recipe}) => {
-    /*{
-        id: 0,
-        url: "",
-        name: "",
-        description: "",
-        score: -1,
-        stepByStep: "",
-        url: ""
-    })*/
-    const NO_DATA_MSG = "Sin especificar";
-
+const RecipeFull = () => {
+    const { id } = useParams();
+    const dispatch = useDispatch();                                       // Dispachador de Redux
+    useEffect(() => { dispatch(getFullDetail(id)) },[dispatch, id])        // Precarga los elementos a mostrar
+    const recipeFull = useSelector((state) => state.recipeFull);          // Hook de traer data del estado global
+    console.log(recipeFull);
     return(
         <>
             <div>
-                <img src={recipe.url} alt="" />
-                <h2>{recipe.name}</h2>
+                <img src={recipeFull.url} alt={recipeFull.name} />
+                <h2>{recipeFull.name}</h2>
                 <h5>Tipo de Plato</h5>
-                <h5><b>Diet: </b>{recipe.diets ? recipe.diets : NO_DATA_MSG}</h5>
-                <h5>Healty Score: {recipe.score ? recipe.score : NO_DATA_MSG}</h5>
+                <h5><b>Diet: </b>{recipeFull.diets ? recipeFull.diets : NO_DATA_MSG}</h5>
+                <h5>Healty Score: {recipeFull.score ? recipeFull.score : NO_DATA_MSG}</h5>
                 <h5>Description: </h5>
-                <h6>    {recipe.description ? recipe.description : NO_DATA_MSG}</h6>
+                <h6>    {recipeFull.description ? recipeFull.description : NO_DATA_MSG}</h6>
                 <h5>Step by Step: </h5>
-                {recipe.stepByStep ? recipe.stepByStep : NO_DATA_MSG}
-    
-
-
+                {recipeFull.stepByStep ? recipeFull.stepByStep : NO_DATA_MSG }
             </div>
         </>
     )

@@ -28,7 +28,7 @@ router.get("/:idReceta", async (req, res) => {
 
 
 router.post("/", async (req, res) => {
-    const { name, description, score, stepByStep, diets } = req.body;
+    const { name, description, score, stepByStep, url, dietsIds } = req.body;
     try {
         const result = await postRecipe(name, description, score, stepByStep, url, dietsIds )
         /*
