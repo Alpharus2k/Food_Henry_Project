@@ -7,6 +7,7 @@ import {  GET_ALL_RECEPIES,
           UNSORTED,
           GET_DIETS,
           FILTER_BY_DIET,
+          GET_FULL_DETAIL,
            } from "../actions/index"
 
 //  GET_RECIPE_BY_ID, GET_DIETS, CREATE_RECIPE
@@ -16,12 +17,15 @@ const initialState = {
   recipes: [],
   sorted: [],
   diets: [],
+  recipeFull: [],
 };
 
 // @state   = Estado Actual
 // @action  = Accion despachada
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_FULL_DETAIL:
+      return {...state, recipeFull: state.recipes.find(rec => rec.id.toString() === action.payload.toString()) }
     case GET_ALL_RECEPIES:
       return {...state, recipes: action.payload, sorted: action.payload}
     case SORT_HIGH_SCORE:
@@ -35,7 +39,7 @@ const rootReducer = (state = initialState, action) => {
     case UNSORTED:
       return { ...state, sorted: [...state.recipes]}
     case GET_RECEPIES_BY_NAME:
-       return {...state, sorted: [...action.payload]}
+       return {...state, recipes: [...action.payload], sorted: [...action.payload]}
     case GET_DIETS:
       return {...state, diets: action.payload}
     case FILTER_BY_DIET:

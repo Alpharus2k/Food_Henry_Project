@@ -1,16 +1,21 @@
 import style from './Recipe-Form.module.css';
 import React from "react";
-import { NO_NAME, NO_DESC, NO_SCORE, NO_DIET, NO_STEPS } from "../Errors/Error-Recipe-Form"
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NO_NAME, NO_DESC, NO_SCORE, NO_DIET, NO_STEPS, NO_URL } from "../Errors/Error-Recipe-Form"
+import { getDiets } from "../../redux/actions/index";
 
-
-export function validate({name, description, score, stepByStep, diets }){
+export function validate({name, description, score, stepByStep, diets, url }){
   // eslint-disable-next-line
   const regexName = /^[a-zA-Z íáúóéñÑ]*$/;
+  // eslint-disable-next-line
+  const regexUrl = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
   const MAX_SCORE = 100;
   const MIN_SCORE = 1;
   const errors = {};
   if( !regexName.test(name) ) errors.name = NO_NAME;
   if( !description.length ) errors.description = NO_DESC;
+  if( url && !regexUrl.test(url) ) errors.name = NO_URL;
   if( isNaN(Number(score)) || (score < MIN_SCORE  || score > MAX_SCORE )) errors.score = NO_SCORE;
   if( !stepByStep ) errors.stepByStep = NO_STEPS;
   if( diets.length < 1 ) errors.diets = NO_DIET;
@@ -18,14 +23,33 @@ export function validate({name, description, score, stepByStep, diets }){
   return errors;
 }
 
+export function buildDiets (diets, handleChangeDiets) {
+  const retorno = diets.map( diet => {
+    return (
+        <div key={diet.id}>
+          <input  type="checkbox"
+                  value={diet.id}
+                  name="diets"
+                  onChange={handleChangeDiets}
+                  />
+          <label htmlFor={diet.name}>{diet.name}</label>
+        </div>
+    )
+  })
+  return retorno;
+}
 export default function RecipeForm(){
-  // State de inputs
+  const dispatch = useDispatch();                             // Dispachador de Redux
+  useEffect(() => { dispatch(getDiets()) },[dispatch])        // Precarga los elementos a mostrar
+  const diets = useSelector((state) => state.diets);          // Hook de traer data del estado global
+
   const [ inputs, setInputs ] = React.useState({
     name: "",
     description: "",
     score: 0,
     stepByStep: "",
-    diets: []
+    diets: [],
+    url: "",
   })
   // State Errors
   const [ errors, setErrors ] = React.useState({
@@ -33,53 +57,67 @@ export default function RecipeForm(){
     description: "",
     score: 0,
     stepByStep: "",
-    diets: []
+    diets: "",
+    url: "",
   })
   // Changes Handler
   const handleChange = (event) => {
-    const property = event.target.name;
-    const value = event.target.value;
-    setInputs({...inputs, [property] : value});
-    setErrors( validate({...inputs, [property] : value}) );
+    setInputs({ ...inputs, [event.target.name] : event.target.value})
+    setErrors( validate( {...inputs, [event.target.name] : event.target.value} ))
   }
+  const handleChangeDiets = (event) => {
+    let auxDiets = [...inputs.diets]
+    auxDiets = auxDiets.includes(event.target.value) ?
+          auxDiets.filter( elem => elem !== event.target.value) :
+          [...inputs.diets, event.target.value]
+
+    setInputs({ ...inputs, diets: auxDiets})
+    setErrors( validate( {...inputs, [event.target.name] : auxDiets} ))
+  }
+ 
+  const dietsCheckBox = buildDiets(diets, handleChangeDiets);
 
   // Submit handler
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    console.log(inputs);
     if(!Object.keys(errors).length){
       // Test
-      alert("Datos completos");
+      let aux = inputs.stepByStep.split("\n").reduce( (resu, step) => resu + "<h6>"+step+"</h6>", "")
+      console.log(aux);
+
+      alert("Posted!");
       setErrors({
         name: "",
         description: "",
         score: 1,
         stepByStep: "",
-        diets: []
+        diets: [],
+        url: "",
       });
       setInputs({
         name: "",
         description: "",
         score: 1,
         stepByStep: "",
-        diets: []
+        diets: [],
+        url: "",
       })
     }else {
-      alert("Debes corregir los errores")
+      alert("Please Complete the Form b4 submit")
     }
   }
   return(
     <>
-    
-    <div className={style.mainContainer}>
-      <h1>Crear Receta</h1>
-    <form onSubmit={handleSubmit} className={style.formContainer}>
+  <div className={style.mainContainer}>
+      <h1>Create Recipe</h1>
+    <form onSubmit={(e) => handleSubmit(e)} className={style.formContainer}>
       {/* Name Input */}
       <div className={style.pairContainer}>
-        <label  htmlFor="name" >Nombre</label>
+        <label  htmlFor="name" >Recipe Title: </label>
         <input  name="name"
                 type="text"
-                placeholder='El nombre de la receta'
+                placeholder='Name of the recipe'
                 value={inputs.name}
                 onChange={handleChange}
                 className={errors.name && "warning"}
@@ -89,11 +127,11 @@ export default function RecipeForm(){
 
       {/* Description Input */}
       <div className={style.pairContainer}>
-        <label  htmlFor="description" >Descripción</label>
+        <label  htmlFor="description" >Description: </label>
         <textarea name="description"
                   type="text"
-                  placeholder='Descripción...'
-                  rows="5"
+                  placeholder='Description...'
+                  rows="2"
                   value={inputs.description}
                   onChange={handleChange}
                   className={errors.name && "warning"}
@@ -103,10 +141,10 @@ export default function RecipeForm(){
 
       {/* Score Input */}
       <div className={style.pairContainer}>
-        <label  htmlFor="score">Que tan saludable es</label>
+        <label  htmlFor="score">Healty Score</label>
         <input  name="score"
                 type="number"
-                placeholder= "Que tan saludable es de 1 a 100"
+                placeholder= "Between 1 and 100"
                 value={inputs.score}
                 onChange={handleChange}
                 className={ errors.score && "warning"}
@@ -116,10 +154,10 @@ export default function RecipeForm(){
 
       {/* Step By Step Input */}
       <div className={style.pairContainer}>
-        <label  htmlFor="stepByStep">Paso a paso</label>
+        <label  htmlFor="stepByStep">Step-by-Step</label>
         <textarea name="stepByStep"
                   type="text"
-                  placeholder='Paso a aso...'
+                  placeholder='1. ....'
                   rows="5"
                   value={inputs.stepByStep}
                   onChange={handleChange}
@@ -128,18 +166,15 @@ export default function RecipeForm(){
         {errors.stepByStep !== "1" && <p className='danger'>{errors.stepByStep}</p>}
       </div>
       {/* Step By Step Input */}
-      <div className={style.pairContainer}>
-        <label>Tipo de dieta</label>
-        {/* Armarlo con un FOR */}
-        {/* <div>
-          <input type="checkbox" id="scales" name="scales"/>
-          <label for="scales">Scales</label>
-        </div> */}
-      </div>
-      {/* AGREGAR EL BOTON!!! */}
-      {/* <button></button> */}
+      <fieldset className={style.gridContainer}>
+        <legend >Type of diet</legend>
+        {dietsCheckBox}
+      </fieldset>
+      {/* Submit */}
+      <button type='submit'
+                >Submit</button>
     </form>
-    </div>
+  </div>
   </>
   )
 }

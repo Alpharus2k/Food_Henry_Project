@@ -4,7 +4,9 @@ const { buildRecipeAPI } = require("./Api-RecipeConverter")
 const { API_KEY } = process.env;
 const { NO_RESULTS } = require("./error-msgs")
 //FAKE DATA
-const { LISTA_RECETAS } = require("../utils/API-simulator")
+const { LISTA_RECETAS } = require("../utils/FakeData")
+const { FAKE } = require("../utils/processedFake")
+
 const getEveryRecipe = async () => {
     /* TEST */
     /*
@@ -27,8 +29,10 @@ const getEveryRecipe = async () => {
                                                          
    //*     FAKE DATA       */                     
    
-    let apiSearch = LISTA_RECETAS.map( re => buildRecipeAPI(re));
-                                                   
+    
+    //let apiSearch = LISTA_RECETAS.map( re => buildRecipeAPI(re));
+                                         
+    let apiSearch = FAKE;
     // Busca en la DB
     const dbSearch = await Recipe.findAll()
 

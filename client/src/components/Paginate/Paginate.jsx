@@ -2,16 +2,19 @@ import RecipeSmall from "../Recipe/Recipe-Small";
 import style from "./Paginate.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 const LIMIT_NUMBER_BUTONS = 10;
 
 const Paginate = ({recipes, perPage, totalPages}) =>{
     const [currentPage, setCurrentPage] = useState(1);
     const [toShow, setToShow ] = useState([]);
-
     useEffect(() => {
         setToShow(recipes.slice(perPage * (currentPage - 1), perPage * currentPage))
-    },[currentPage,recipes,perPage])
+    },[currentPage, recipes, setToShow, perPage])
 
+    useEffect(()=>{
+        setCurrentPage(1)
+    },[recipes,setCurrentPage])
     // Botones de acceso rapido de paginado
     let buttons = makeButtons(totalPages, currentPage, setCurrentPage);
 
@@ -21,9 +24,11 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
             <div className={style.gridContainer }>
             { toShow && toShow.map( (recipe) => {
                 return (
-                    <div key={recipe.id} className={style.recipe} >
-                        <RecipeSmall recipe={recipe} />
-                    </div>
+                        <div key={recipe.id} className={style.recipe} >
+                             <Link to={`/recipe/${recipe.id}`}>
+                                <RecipeSmall recipe={recipe} />
+                            </Link>
+                        </div>
                     )
                 }
             )}

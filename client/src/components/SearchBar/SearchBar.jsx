@@ -1,53 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-		sortRecipesHighScore,
-		sortRecipesLowScore,
-        sortRecipesAsc,
-        sortRecipesDesc,
-		unSorted,
-		getDiets,
-		filterByDiet,
-		getAllRecipes} from '../../redux/actions/index';
+import { searchSortFilter, getDiets } from '../../redux/actions/index';
 import style from "./SearchBar.module.css";
 
-const SearchBar = ({find, handleSearchChange}) => {
+const SearchBar = () => {
 	const DEF_VALUE = "none";
 	const dispatch = useDispatch();
- 	const [sort, setSort] = useState(DEF_VALUE);
-	//const [filter, setFilter] = useState(DEF_VALUE);
+	const [ search, setSearch ] = useState("");                   // Hook que permite dispachar acctions de REDUX
+ 	const [ sort, setSort] = useState(DEF_VALUE);
+	const [ dietFilterBy, setDietDilterBy ] = useState(DEF_VALUE)
 	useEffect(() => { dispatch(getDiets()) },[dispatch])     // Precarga los elementos a mostrar
 	const diets = useSelector((state) => state.diets);
-	useEffect(() => {
-		switch( sort ){
-			case "desc":
-				dispatch(sortRecipesDesc());
-				break;
-			case "asc":
-				dispatch(sortRecipesAsc());
-				break;
-			case "high":
-				dispatch(sortRecipesHighScore())
-				break;
-			case "low":
-				dispatch(sortRecipesLowScore())
-				break;
-			default:
-				dispatch(unSorted())
-				break;
-		}
-		return () => {
-		 	dispatch(unSorted());
-		}
-		}, [sort, dispatch]);
-
-		const handleFilter = (diet) => {
-    		if (diet !== DEF_VALUE){
-      			dispatch(filterByDiet(diet));
-    		}else {
-				dispatch(getAllRecipes())
-			}
-		}
+	useEffect(()=> {
+		dispatch(searchSortFilter(search, sort, dietFilterBy));
+	},[search,sort,dietFilterBy,dispatch])
 
 	return (
 		<div>
@@ -62,8 +28,8 @@ const SearchBar = ({find, handleSearchChange}) => {
 					<input
 						className={style.resize }
 						type="text"
-						value={find}
-						onChange={handleSearchChange}
+						value={search}
+						onChange={(e) => setSearch(e.target.value)}
 						placeholder="Search"
 					/>
 				</div>
@@ -81,7 +47,7 @@ const SearchBar = ({find, handleSearchChange}) => {
 				{/* Filter By Diet*/}
 				<div>
 					<h5>Filer By Diet:</h5>
-					<select className={style.resize} onChange={(e) => handleFilter(e.target.value)} defaultValue={DEF_VALUE}>
+					<select className={style.resize} onChange={(e) => setDietDilterBy(e.target.value)} defaultValue={DEF_VALUE}>
 						<option value={DEF_VALUE}>...</option>
 						{ diets.map( diet => {
 							return (
