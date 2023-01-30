@@ -3,6 +3,7 @@ const { Diet } = require('../db.js');
 //const { Op } = require("sequelize");
 const { API_KEY } = process.env;
 const { buildDietAPI } = require("./Api-DietConverter")
+const {DB_FORCE} = process.env;
 
 const getDiets = async () => {
     /* TEST */
@@ -29,11 +30,10 @@ const getDiets = async () => {
 
     const aux = apiSearch.map(diet => buildDietAPI( diet ));
     //const aux = auxArr.map(diet => buildDietAPI( diet ));
-    console.log(aux);
+
     return await Diet.bulkCreate(aux, {returning: true});
     //return await Promise.all(aux.map(d => Diet.create(d)));
     }
-
     return dbSearch;
 }
 

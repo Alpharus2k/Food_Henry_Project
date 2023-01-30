@@ -8,9 +8,8 @@ import {  GET_ALL_RECEPIES,
           GET_DIETS,
           FILTER_BY_DIET,
           GET_FULL_DETAIL,
+          CREATE_RECIPE
            } from "../actions/index"
-
-//  GET_RECIPE_BY_ID, GET_DIETS, CREATE_RECIPE
 
 // @initialState == estado inicial del REDUCER
 const initialState = {
@@ -24,6 +23,8 @@ const initialState = {
 // @action  = Accion despachada
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case CREATE_RECIPE:
+      return {...state, recipes: [action.payload, ...state.recipes], sorted: [action.payload, ...state.sorted]}
     case GET_FULL_DETAIL:
       return {...state, recipeFull: state.recipes.find(rec => rec.id.toString() === action.payload.toString()) }
     case GET_ALL_RECEPIES:

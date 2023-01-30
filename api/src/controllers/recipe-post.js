@@ -7,12 +7,15 @@ const postRecipe = async (name, description, score, stepByStep, url, dietsIds) =
     if( !description.trim().length ) throw Error(INVALID_DESCRIPTION);
 
     const newRecipe = await Recipe.create({name, description, score, stepByStep, url});
-
+    
     /* TODO */
-    if(dietsIds.length) await newRecipe.setDiet(dietsIds);
+    console.log(dietsIds);
+    console.log(newRecipe.dataValues);
+    if(dietsIds.length) await newRecipe.setDiets(dietsIds);
+    
     /* VERIFICAR el recipe a ver que contiene */
-    console.log("New Recipe");
-    console.log(newRecipe);
+                                          
+    
     return newRecipe;
 }
 

@@ -29,9 +29,14 @@ function dispatchSort(sort) {
     }
   }
 }
-export const createRecipe = () => {
+export const createRecipe = (name, description, score, stepByStep, url, dietsIds) => {
   return async (dispatch) => {
     console.log("Entra al create");
+    console.log(name + " / "+description + " / "+score + " / "+stepByStep + " / "+url + " / "+ dietsIds);
+    //window.env.URL_POST_RECIPE
+    const result = await axios.post(window.env.URL_POST_RECIPE,{name, description, score, stepByStep, url, dietsIds})
+    let data = result.data;
+    dispatch({type: CREATE_RECIPE, payload: data})
   }
 }
 export const searchSortFilter = (search, sort, filter) => {

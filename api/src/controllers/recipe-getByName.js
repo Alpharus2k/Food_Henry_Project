@@ -21,7 +21,7 @@ const getRecipeByName = async (name) => {
     const dbSearch = await Recipe.findAll({where: { name: { [Op.iLike]: `%${name}%` }}})
 
     // Integra las busquedas
-    results = [...apiSearch, ...dbSearch];
+    results = [...dbSearch, ...apiSearch];
     if( !results.length ) throw Error(NO_RESULTS)
     return results;
 }
