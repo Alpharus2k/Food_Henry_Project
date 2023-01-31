@@ -5,10 +5,8 @@ const { getDiets } = require("../controllers/diet-getDiets")
 
 router.get("/", async (req, res) => {
     try {
-        //const result = await getDiets();
-        /* TEST */
-        //return res.status(200).json( result )
-        return res.status(200).json( "HOLA la ruta /diets FUNCIONA!!!!" )
+        const result = await getDiets();
+        return res.status(200).json( result )
     } catch (error) {
         return res.status(400).json({ error: error.message })
     }
