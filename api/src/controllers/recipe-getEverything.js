@@ -1,5 +1,5 @@
 const axios = require("axios")
-const { Recipe } = require('../db.js');
+const { Recipe, Diet } = require('../db.js');
 const { buildRecipeAPI } = require("./Api-RecipeConverter")
 const { API_KEY } = process.env;
 const { NO_RESULTS } = require("./error-msgs")
@@ -20,10 +20,16 @@ const getEveryRecipe = async () => {
                                                          
    //*     FAKE DATA       */
     let apiSearch = FAKE;
-                                                        
+                                                           
 
     // Busca en la DB
-    const dbSearch = await Recipe.findAll()
+    const dbSearch = await Recipe.findAll({include: {
+        model: Diet,
+        attributes: ["name"],
+            through: {
+                attributes: [],
+            }
+    }})
 
     // Integra las busquedas
     results = [...dbSearch, ...apiSearch];

@@ -31,10 +31,7 @@ function dispatchSort(sort) {
 }
 export const createRecipe = (name, description, score, stepByStep, url, dietsIds) => {
   return async (dispatch) => {
-    console.log("Entra al create");
-    console.log(name + " / "+description + " / "+score + " / "+stepByStep + " / "+url + " / "+ dietsIds);
-    //window.env.URL_POST_RECIPE
-    const result = await axios.post(window.env.URL_POST_RECIPE,{name, description, score, stepByStep, url, dietsIds})
+    const result = await axios.post(window.env.URL_POST_RECIPE, {name, description, score, stepByStep, url, dietsIds})
     let data = result.data;
     dispatch({type: CREATE_RECIPE, payload: data})
   }
@@ -51,7 +48,7 @@ export const searchSortFilter = (search, sort, filter) => {
 
 export const getFullDetail = (id) => {
   return async (dispatch) => {
-    await dispatch({type: GET_FULL_DETAIL, payload: id})
+    await dispatch({type: GET_FULL_DETAIL, payload: id});
   }
 }
 export const filterByDiet = (diet) => {
@@ -90,7 +87,7 @@ export const sortRecipesLowScore = () => {
   }
 }
 export const getRecipeByName = (name) => async (dispatch) =>{
-  console.log("NAME "+name);
+
   //let url = window.event.URL_RECIPES+`/?name="+${name}`
   let apiData = await axios.get(`http://localhost:3001/recipes/?name=${name}`)
   let data = apiData.data;

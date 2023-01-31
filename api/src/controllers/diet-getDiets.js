@@ -6,12 +6,6 @@ const { buildDietAPI } = require("./Api-DietConverter")
 const {DB_FORCE} = process.env;
 
 const getDiets = async () => {
-    /* TEST */
-    /*
-    await Diet.create({name: "Una muy estupida"})
-    await Diet.create({name: "Kamikaze"})
-    await Diet.create({name: "Gatotariana"})
-    /* FIN TEST */
     // Busca en la DB
     const dbSearch = await Diet.findAll();
     if( !dbSearch.length ){

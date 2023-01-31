@@ -12,6 +12,11 @@
 	color: #292929;
   background: rgba(233, 246, 250, 0.3);
 }
+.recipe a {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
 .spaced {
   display: flex;
   justify-content: space-around;
