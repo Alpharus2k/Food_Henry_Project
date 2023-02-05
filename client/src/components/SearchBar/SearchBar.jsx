@@ -13,7 +13,7 @@ const SearchBar = () => {
 	const diets = useSelector((state) => state.diets);
 	useEffect(()=> {
 		dispatch(searchSortFilter(search, sort, dietFilterBy));
-	},[search,sort,dietFilterBy,dispatch])
+	},[search, sort, dietFilterBy, dispatch])
 
 	return (
 		<div>

@@ -9,7 +9,7 @@ const getDiets = async () => {
     // Busca en la DB
     const dbSearch = await Diet.findAll();
     if( !dbSearch.length ){
-        // Obtener datos de la API - NO SE COMO AUN
+        // Obtener datos de la API -
     /*
     let apiSearch = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
                     .then(response => response.data.results)

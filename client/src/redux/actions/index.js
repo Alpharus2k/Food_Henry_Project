@@ -38,17 +38,27 @@ export const createRecipe = (name, description, score, stepByStep, url, dietsIds
 }
 export const searchSortFilter = (search, sort, filter) => {
   return async(dispatch) => {
-    if(search.trim().length) await dispatch(getRecipeByName(search))
-    else await dispatch(getAllRecipes())
-
-    if(sort !== "none")   await dispatch(dispatchSort(sort))
-    if(filter !== "none")  await dispatch(filterByDiet(filter))
+    try {
+      if(search.trim().length)  await dispatch(getRecipeByName(search))
+      else  await dispatch(getAllRecipes())
+    } catch (error) {
+      alert(error.response.data.error)
+    }finally{
+      if(sort !== "none")   await dispatch(dispatchSort(sort))
+      if(filter !== "none")  await dispatch(filterByDiet(filter))
+    }
   }
 }
 
 export const getFullDetail = (id) => {
   return async (dispatch) => {
-    await dispatch({type: GET_FULL_DETAIL, payload: id});
+    try {
+      await axios.get(`http://localhost:3001/recipes/${id}`)
+                .then(res => res.data)
+                .then(data => dispatch({type: GET_FULL_DETAIL, payload: data}))
+    } catch (error) {
+      alert(error.response.data.error)
+    }
   }
 }
 export const filterByDiet = (diet) => {
@@ -87,18 +97,23 @@ export const sortRecipesLowScore = () => {
   }
 }
 export const getRecipeByName = (name) => async (dispatch) =>{
-
   //let url = window.event.URL_RECIPES+`/?name="+${name}`
-  let apiData = await axios.get(`http://localhost:3001/recipes/?name=${name}`)
-  let data = apiData.data;
-  dispatch({type: GET_RECEPIES_BY_NAME, payload: data})
+  try {
+    let apiData = await axios.get(`http://localhost:3001/recipes/?name=${name}`)
+    let data = apiData.data;
+    dispatch({type: GET_RECEPIES_BY_NAME, payload: data})
+  } catch (error) {
+    alert(error.response.data.error)
+  }
 };
 
-export const getAllRecipes = () =>  {
-  return function (dispatch) {
-    return axios.get(window.env.URL_RECIPES)
+export const getAllRecipes = () => async (dispatch) => {
+    try {
+      axios.get(`http://localhost:3001/recipes/`)
                  .then(res => res.data)
                  .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
-
-  };
+    } catch (error) {
+      alert(error.response.data.error)
+    }
 };
+

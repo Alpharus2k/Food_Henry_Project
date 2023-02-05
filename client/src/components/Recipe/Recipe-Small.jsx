@@ -10,6 +10,7 @@ const RecipeSmall = ({recipe}) => {
             <h2 className={style.recipe__h2}>{recipe?.name}</h2>
             <p className={style.recipe__p} ><b>Diets:  </b>{diets}</p>
             <p className={style.lastElem} ><b>Healty Score:  </b>{recipe.score}</p>
+
         </>
     )
 }

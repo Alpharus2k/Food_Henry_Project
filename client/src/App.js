@@ -13,7 +13,7 @@ function App() {
     <div style={{marginBottom: "2rem"}}>
       {pathname !== "/" &&  <NavBar />}
       {/* NavBar solo aparece en Páginas Específicas
-        {pathname !== "/" && (["/home","/create"].findIndex(e => e.includes(pathname)) >= 0) && <NavBar />}
+        {pathname !== "/" && (["/home","/create", "/recipe"].findIndex(e => e.includes(pathname)) >= 0) && <NavBar />}
       */}
        <Routes>
           <Route exact path={"/"} element={<Landing/>}> </Route>

@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        is: /^[a-zA-Z íáúóéñÑ]*$/,
+        is: /^[a-zA-Z íáúóéÍÁÓÚÉñÑ]*$/,
         notEmpty: true,
         notNull: {
           msg: NO_NAME
@@ -36,7 +36,7 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       // Validacion: No negativo, Entre tal y tal
       validate: {
-        len: [MIN_SCORE,MAX_SCORE],
+        len: [MIN_SCORE, MAX_SCORE],
       }
     },
     stepByStep: {
