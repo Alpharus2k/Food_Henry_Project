@@ -95,7 +95,7 @@ export default function RecipeForm(){
       <div className={style.pairContainer && style.width65}>
         <label  htmlFor="name" >Recipe Title:  </label>
         <input  name="name"
-                type="text"
+               type="text"
                 placeholder='Name of the recipe'
                 value={inputs.name}
                 onChange={handleChange}

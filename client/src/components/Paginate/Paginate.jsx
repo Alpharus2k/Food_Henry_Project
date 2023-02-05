@@ -2,7 +2,7 @@ import RecipeSmall from "../Recipe/Recipe-Small";
 import style from "./Paginate.module.css";
 import { useState } from "react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const LIMIT_NUMBER_BUTONS = 10;
 
 const Paginate = ({recipes, perPage, totalPages}) =>{
@@ -25,9 +25,9 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
             { toShow && toShow.map( (recipe) => {
                 return (
                         <div key={recipe.id} className={style.recipe} >
-                             <Link to={`/recipe/${recipe.id}`}>
+                             <NavLink to={`/recipe/${recipe.id}`}>
                                 <RecipeSmall recipe={recipe} />
-                            </Link>
+                            </NavLink>
                         </div>
                     )
                 }

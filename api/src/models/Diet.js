@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
       unique: true,
       validate: {
         notEmpty: true,
-        is: /^[a-zA-Z0-9 íáúóéñÑ/-]*$/,
+        is: /^[a-zA-Z0-9 íáúóéÍÁÓÚÉñÑ/-]*$/,
         notEmpty: true,
         notNull: {
           msg: NO_NAME

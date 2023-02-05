@@ -1,3 +1,43 @@
-.bgRed{
-    background-color: red;
+.detailContainer {
+    display: flex;
+    margin: 1rem 4rem 2rem 4rem;
+    flex-direction: column;
+}
+.title {
+    margin: 1rem auto;
+}
+.image {
+    width: 60%;
+    border-radius: 2rem;
+    margin: 0 auto;
+}
+.rowContainer {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.rowRigthElem{
+margin: 1rem;
+}
+.rowLeftElem{
+    margin: 1rem;
+}
+.descContainer {
+    margin: 1rem 5rem;
+}
+.descContainer h5{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+.descContainer p{
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+.rowLeftElem h5{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+.rowRigthElem h5{
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
 }

@@ -1,5 +1,5 @@
 const axios = require("axios")
-const { Recipe } = require('../db.js');
+const { Recipe, Diet } = require('../db.js');
 const { Op } = require("sequelize");
 const { buildRecipeAPI } = require("./Api-RecipeConverter")
 const { API_KEY } = process.env;
@@ -18,7 +18,13 @@ const getRecipeByName = async (name) => {
         apiSearch = apiSearch.map( re => buildRecipeAPI(re))
 
         // Busca en la DB
-    const dbSearch = await Recipe.findAll({where: { name: { [Op.iLike]: `%${name}%` }}})
+    const dbSearch = await Recipe.findAll({where: { name: { [Op.iLike]: `%${name}%` }}, include: {
+        model: Diet,
+        attributes: ["name"],
+            through: {
+                attributes: [],
+            }
+    }})
 
     // Integra las busquedas
     results = [...dbSearch, ...apiSearch];

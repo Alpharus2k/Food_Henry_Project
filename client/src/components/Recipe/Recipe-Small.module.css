@@ -1,9 +1,11 @@
 
+
 .recipe__img{
     width: 100%;
     height: auto;
     border-radius: 0.6rem;
 }
+
 .recipe__h2{
     font-size: 1.5rem;
 }
@@ -11,3 +13,11 @@
     font-size: 1.1rem;
     padding-top: 0.3rem;
 }
+.lastElem {
+    font-size: 1.1rem;
+    padding-top: 0.3rem;
+
+    /* align-self: center; */
+     /* margin-top: auto;  */
+}
+

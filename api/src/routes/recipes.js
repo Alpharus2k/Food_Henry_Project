@@ -5,6 +5,7 @@ const { getRecipeByID } = require("../controllers/recipe-getByID")
 const { postRecipe } = require("../controllers/recipe-post")
 const { getEveryRecipe } = require("../controllers/recipe-getEverything")
 
+
 router.get("/", async (req, res) => {
     const { name } = req.query;
     try {
@@ -18,6 +19,7 @@ router.get("/", async (req, res) => {
 router.get("/:idReceta", async (req, res) => {
     const { idReceta } = req.params;
     try {
+        
         const result = await getRecipeByID( idReceta );
         return res.status(200).json(result)
     } catch (error) {
@@ -25,15 +27,10 @@ router.get("/:idReceta", async (req, res) => {
     }
 });
 
-
-
 router.post("/", async (req, res) => {
     const { name, description, score, stepByStep, url, dietsIds } = req.body;
     try {
         const result = await postRecipe(name, description, score, stepByStep, url, dietsIds )
-        /*
-            RECIBIR Y ASOCIAR Recipe <=> 
-        */
         return res.status(200).json(result)
     } catch (error) {
         return res.status(400).json({ error: error.message })
