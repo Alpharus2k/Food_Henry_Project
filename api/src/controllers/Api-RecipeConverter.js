@@ -10,6 +10,8 @@ module.exports = {
             case "id":
                 retorno[elem] = apiObj.id;
                 break;
+            case "dishTypes":
+                retorno[elem] = apiObj.dishTypes ? apiObj.dishTypes : null;
             case "name":
                 retorno[elem] = apiObj.title;
                 break;

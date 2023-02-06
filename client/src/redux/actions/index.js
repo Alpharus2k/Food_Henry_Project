@@ -1,3 +1,4 @@
+
 import axios from "axios";
 // Action Type!!
 export const GET_FULL_DETAIL = "GET_FULL_DETAIL";
@@ -34,6 +35,7 @@ export const createRecipe = (name, description, score, stepByStep, url, dietsIds
     const result = await axios.post(window.env.URL_POST_RECIPE, {name, description, score, stepByStep, url, dietsIds})
     let data = result.data;
     dispatch({type: CREATE_RECIPE, payload: data})
+    alert("Su receta se ha creado con exito")
   }
 }
 export const searchSortFilter = (search, sort, filter) => {
@@ -101,7 +103,7 @@ export const getRecipeByName = (name) => async (dispatch) =>{
   try {
     let apiData = await axios.get(`http://localhost:3001/recipes/?name=${name}`)
     let data = apiData.data;
-    dispatch({type: GET_RECEPIES_BY_NAME, payload: data})
+    return dispatch({type: GET_RECEPIES_BY_NAME, payload: data})
   } catch (error) {
     alert(error.response.data.error)
   }
@@ -109,11 +111,13 @@ export const getRecipeByName = (name) => async (dispatch) =>{
 
 export const getAllRecipes = () => async (dispatch) => {
     try {
-      axios.get(`http://localhost:3001/recipes/`)
+      return axios.get(`http://localhost:3001/recipes/`)
                  .then(res => res.data)
                  .then(data => dispatch({type: GET_ALL_RECEPIES, payload: data}))
     } catch (error) {
       alert(error.response.data.error)
     }
 };
+
+
 

@@ -3,19 +3,23 @@ const { Recipe, Diet } = require('../db.js');
 const { Op } = require("sequelize");
 const { buildRecipeAPI } = require("./Api-RecipeConverter")
 const { API_KEY } = process.env;
-const { NO_RESULTS, INVALID_NAME } = require("./error-msgs")
+const { NO_RESULTS, INVALID_NAME, API_IS_DEAD } = require("./error-msgs")
 
 
 const getRecipeByName = async (name) => {
 
     if( !name.length || !name.trim() ) throw Error(INVALID_NAME)
     let results = [];
-        // Obtener datos de la API                                                                          //&titleMatch=${name} &query=${name}     //&number=100
-
-    let apiSearch =  await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true&number=21`)
+        // Obtener datos de la API
+    let apiSearch;                                                                          //&titleMatch=${name} &query=${name}     //&number=100
+    try {
+        apiSearch =  await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&query=${name}&addRecipeInformation=true&number=21`)
                     .then(response => response.data.results)
         // Los transforma acorde al Model.Recipe los datos recibidos de la api
         apiSearch = apiSearch.map( re => buildRecipeAPI(re))
+    } catch (error) {
+        throw new Error(API_IS_DEAD)
+    }
 
         // Busca en la DB
     const dbSearch = await Recipe.findAll({where: { name: { [Op.iLike]: `%${name}%` }}, include: {

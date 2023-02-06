@@ -42,6 +42,9 @@ module.exports = (sequelize) => {
     stepByStep: {
       type: DataTypes.TEXT,
     },
+    dishTypes:{
+      type: DataTypes.STRING,
+    },
     url:{
       type: DataTypes.STRING,
       validate: {

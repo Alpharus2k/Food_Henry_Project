@@ -8,6 +8,7 @@ const LIMIT_NUMBER_BUTONS = 10;
 const Paginate = ({recipes, perPage, totalPages}) =>{
     const [currentPage, setCurrentPage] = useState(1);
     const [toShow, setToShow ] = useState([]);
+
     useEffect(() => {
         setToShow(recipes.slice(perPage * (currentPage - 1), perPage * currentPage))
     },[currentPage, recipes, setToShow, perPage])

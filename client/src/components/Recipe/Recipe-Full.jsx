@@ -26,6 +26,10 @@ const RecipeFull = () => {
                         <p>{diets}</p>
                     </div>
                     <div className={style.rowLeftElem}>
+                        <h5><b>Dish Types: </b></h5>
+                        <p>{recipeFull.dishTypes ? recipeFull.dishTypes : NO_DATA_MSG}</p>
+                    </div>
+                    <div className={style.rowLeftElem}>
                         <h5><b>Healty Score: </b></h5>
                         <p>{recipeFull.score ? recipeFull.score : NO_DATA_MSG}</p>
                     </div>
