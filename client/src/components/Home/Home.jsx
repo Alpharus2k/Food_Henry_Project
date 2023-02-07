@@ -14,6 +14,10 @@ const Home = () => {
     /* Constants */
     const RECIPE_PER_PAGE = 9;
     const totalPages = Math.ceil(recipes.length / RECIPE_PER_PAGE)
+    // Scroll to Top!
+    useEffect (() => {
+      window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  })
     return(
     <>
       {/* SearchBar && Filters */}

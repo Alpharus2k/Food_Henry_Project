@@ -19,6 +19,10 @@ const Paginate = ({recipes, perPage, totalPages}) =>{
     // Botones de acceso rapido de paginado
     let buttons = makeButtons(totalPages, currentPage, setCurrentPage);
 
+    useEffect (() => {
+        window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    })
+    
     return (
         <>
         {/* Prototype of the view */}

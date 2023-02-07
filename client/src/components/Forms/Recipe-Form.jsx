@@ -1,7 +1,8 @@
 import style from './Recipe-Form.module.css';
 import React from "react";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+//import { useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector} from "react-redux";
 import { NO_NAME, NO_DESC, NO_SCORE, NO_DIET, NO_STEPS, NO_URL } from "../Errors/Error-Recipe-Form"
 import { getDiets } from "../../redux/actions/index";
 import { createRecipe } from "../../redux/actions/index"
@@ -14,7 +15,8 @@ export function validate({name, description, score, stepByStep, diets, url }){
   const MAX_SCORE = 100;
   const MIN_SCORE = 1;
   const errors = {};
-  if( !regexName.test(name) ) errors.name = NO_NAME;
+  if( !regexName.test(name)  ) errors.name = NO_NAME;
+  //if (name.length < 30) errors.name = TO_SHORT;
   if( !description.length ) errors.description = NO_DESC;
   if( url && !regexUrl.test(url) ) errors.name = NO_URL;
   if( isNaN(Number(score)) || (score < MIN_SCORE  || score > MAX_SCORE )) errors.score = NO_SCORE;
@@ -62,7 +64,8 @@ export default function RecipeForm(){
     setInputs({ ...inputs, diets: auxDiets})
     setErrors( validate( {...inputs, [event.target.name] : auxDiets} ))
   }
-
+  //const history = useNavigate();
+  
   const dietsCheckBox = buildDiets(diets, handleChangeDiets);
 
   // Submit handler
@@ -82,6 +85,8 @@ export default function RecipeForm(){
     }else {
       alert("Please Complete the Form b4 submit")
     }
+    /* TODO */
+    //history.push("/home")
   }
   return(
     <>
